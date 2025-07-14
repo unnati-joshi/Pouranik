@@ -7,28 +7,34 @@ export default function BookDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setBook(null);
+    setLoading(true);
+
     fetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
       .then(res => res.json())
       .then(data => {
         setBook(data);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((error) => {
+        console.error("Failed to fetch book details:", error);
+        setLoading(false);
+      });
   }, [id]);
+
+  const cardBaseClasses = "bg-white rounded-xl shadow-lg border border-gray-100 !p-6 transition-all duration-300";
 
   if (loading) {
     return (
-      <div className="min-h-screen flex-center">
-        <div className="glass-effect card-modern max-w-md border-subtle text-center">
-          <div className="pulse-animation text-6xl mb-6">📚</div>
-          <h3 className="heading-tertiary text-white mb-4">Loading Book Details</h3>
-          <p className="text-body text-gray-300">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+        <div className={`${cardBaseClasses} max-w-md text-center`}>
+          <div className="animate-bounce text-6xl mb-6">📚</div>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Loading Book Details</h3>
+          <p className="text-gray-600 mb-8">
             Fetching comprehensive information about this book...
           </p>
-          <div className="mt-6">
-            <div className="w-full bg-white bg-opacity-20 rounded-full h-2">
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-400 h-2 rounded-full animate-pulse w-3/4"></div>
-            </div>
+          <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+            <div className="bg-gradient-to-r from-blue-400 to-indigo-500 h-full rounded-full animate-pulse w-3/4"></div>
           </div>
         </div>
       </div>
@@ -37,26 +43,26 @@ export default function BookDetail() {
 
   if (!book || book.error) {
     return (
-      <div className="min-h-screen flex-center">
-        <div className="glass-effect card-modern max-w-lg border-subtle text-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+        <div className={`${cardBaseClasses} max-w-lg text-center`}>
           <div className="text-6xl mb-6">😔</div>
-          <h2 className="heading-secondary text-white mb-4">Book Not Found</h2>
-          <p className="text-body text-gray-300 mb-8">
+          <h2 className="text-3xl font-bold text-gray-800 mb-4">Book Not Found</h2>
+          <p className="text-gray-600 mb-8">
             Sorry, we couldn't find the book you're looking for. It might have been removed or the link is incorrect.
           </p>
-          <div className="space-y-4">
-            <Link 
-              to="/explore" 
-              className="button-primary inline-flex items-center gap-3 no-underline"
+          <div className="space-y-4 sm:flex sm:space-y-0 sm:space-x-4 justify-center">
+            <Link
+              to="/explore"
+              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 no-underline"
             >
-              <span className="text-xl">🔍</span>
+              <span className="mr-2">🔍</span>
               Explore Other Books
             </Link>
-            <Link 
-              to="/genres" 
-              className="button-secondary inline-flex items-center gap-3 no-underline"
+            <Link
+              to="/genres"
+              className="inline-flex items-center justify-center px-6 py-3 border border-blue-600 text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 no-underline"
             >
-              <span className="text-xl">📑</span>
+              <span className="mr-2">📚</span>
               Browse Genres
             </Link>
           </div>
@@ -65,99 +71,106 @@ export default function BookDetail() {
     );
   }
 
-  const info = book.volumeInfo;
-  const imageUrl = info.imageLinks?.large || info.imageLinks?.medium || info.imageLinks?.thumbnail;
+  const info = book.volumeInfo || {};
+  const imageUrl =
+    info.imageLinks?.extraLarge || info.imageLinks?.large || info.imageLinks?.medium || info.imageLinks?.thumbnail;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50 font-sans antialiased">
       {/* Navigation */}
-      <section className="py-8">
-        <div className="container-modern">
-          <Link 
-            to="/explore" 
-            className="inline-flex items-center gap-3 text-white hover:text-yellow-300 transition-colors duration-300 glass-effect px-4 py-2 rounded-2xl border border-white border-opacity-20 no-underline"
+      <section className="!py-8 bg-white shadow-sm">
+        <div className="!max-w-7xl mx-auto !px-4 !sm:px-6 !lg:px-8">
+          <Link
+            to="/explore"
+            className="inline-flex items-center !px-4 !py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 no-underline"
           >
-            <span className="text-lg">←</span>
+            <span className="!mr-2 text-lg">←</span>
             Back to Explore
           </Link>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="pb-16">
-        <div className="container-modern">
-          <div className="grid lg:grid-cols-5 gap-12">
-            {/* Book Cover Column */}
+      <section className="!py-12 !px-17 !md:py-16">
+        <div className="max-w-7xl mx-auto !px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-5 !gap-12 lg:gap-16">
+
             <div className="lg:col-span-2">
-              <div className="glass-effect card-modern book-card-hover border-medium sticky top-8">
-                {/* Book Image */}
-                <div className="mb-8">
+              <div className={`${cardBaseClasses} sticky !top-8 flex flex-col items-center !p-8`}>
+                <div className="!mb-8 w-full max-w-xs sm:max-w-sm lg:max-w-full">
                   {imageUrl ? (
                     <img
-                      className="w-full max-w-sm mx-auto rounded-3xl shadow-2xl border-4 border-white border-opacity-20"
+                      className="w-full h-auto rounded-lg shadow-xl border border-gray-100 transform hover:scale-105 transition-transform duration-300 mx-auto"
                       src={imageUrl.replace('http:', 'https:')}
-                      alt={info.title}
+                      alt={info.title || "Book Cover"}
                     />
                   ) : (
-                    <div className="w-full max-w-sm mx-auto h-96 bg-gradient-to-br from-purple-400 via-blue-400 to-cyan-400 rounded-3xl flex-center border-4 border-white border-opacity-20">
-                      <span className="text-8xl filter drop-shadow-lg">📚</span>
+                    <div className="w-full aspect-w-2 aspect-h-3 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 rounded-lg flex flex-col items-center justify-center p-8 text-gray-400 text-center shadow-md">
+                      <span className="text-7xl !mb-3" role="img" aria-label="No Cover">
+                        📖
+                      </span>
+                      <p className="text-lg font-semibold">No Cover Available</p>
                     </div>
                   )}
                 </div>
-                
-                {/* Quick Info */}
-                <div className="space-y-4 mb-8">
+
+                <div className="w-full grid grid-cols-2 !gap-4 text-center !mb-8">
                   {info.averageRating && (
-                    <div className="glass-effect p-4 rounded-2xl text-center border border-white border-opacity-20">
-                      <div className="flex-center gap-2 mb-2">
-                        <span className="text-yellow-400 text-2xl">⭐</span>
-                        <span className="text-white text-xl font-bold">{info.averageRating}</span>
-                      </div>
+                    <div className="bg-blue-50 text-blue-700 !p-4 rounded-lg flex flex-col items-center justify-center shadow-sm">
+                      <span className="text-3xl !mb-1">⭐</span>
+                      <span className="text-2xl font-bold">{info.averageRating.toFixed(1)}</span>
                       {info.ratingsCount && (
-                        <p className="text-small text-gray-300">
-                          Based on {info.ratingsCount.toLocaleString()} reviews
+                        <p className="text-xs text-blue-600 !mt-1">
+                          ({info.ratingsCount.toLocaleString()} ratings)
                         </p>
                       )}
                     </div>
                   )}
-                  
-                  <div className="grid grid-cols-2 gap-3 text-center">
-                    {[
-                      { icon: '📅', label: 'Published', value: info.publishedDate ? new Date(info.publishedDate).getFullYear() : 'Unknown' },
-                      { icon: '📄', label: 'Pages', value: info.pageCount ? `${info.pageCount}` : 'Unknown' },
-                      { icon: '🌐', label: 'Language', value: info.language ? info.language.toUpperCase() : 'Unknown' },
-                      { icon: '📚', label: 'Type', value: info.printType || 'Book' }
-                    ].map((item, index) => (
-                      <div key={index} className="glass-effect p-3 rounded-xl border border-white border-opacity-20">
-                        <div className="text-lg mb-1">{item.icon}</div>
-                        <div className="text-xs text-gray-400 mb-1">{item.label}</div>
-                        <div className="text-white text-sm font-medium">{item.value}</div>
-                      </div>
-                    ))}
-                  </div>
+
+                  {info.publishedDate && (
+                    <div className="bg-green-50 text-green-700 !p-4 rounded-lg flex flex-col items-center justify-center shadow-sm">
+                      <span className="text-3xl !mb-1">📅</span>
+                      <span className="text-xl font-bold">{new Date(info.publishedDate).getFullYear()}</span>
+                      <p className="text-xs text-green-600 !mt-1">Published Year</p>
+                    </div>
+                  )}
+
+                  {info.pageCount && (
+                    <div className="bg-yellow-50 text-yellow-700 !p-4 rounded-lg flex flex-col items-center justify-center shadow-sm">
+                      <span className="text-3xl !mb-1">📄</span>
+                      <span className="text-xl font-bold">{info.pageCount}</span>
+                      <p className="text-xs text-yellow-600 !mt-1">Pages</p>
+                    </div>
+                  )}
+
+                  {info.language && (
+                    <div className="bg-purple-50 text-purple-700 !p-4 rounded-lg flex flex-col items-center justify-center shadow-sm">
+                      <span className="text-3xl !mb-1">🌐</span>
+                      <span className="text-xl font-bold uppercase">{info.language}</span>
+                      <p className="text-xs text-purple-600 !mt-1">Language</p>
+                    </div>
+                  )}
                 </div>
-                
-                {/* Action Buttons */}
-                <div className="space-y-3">
+
+                <div className="w-full space-y-3">
                   {info.previewLink && (
-                    <a 
-                      href={info.previewLink} 
-                      target="_blank" 
+                    <a
+                      href={info.previewLink}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="button-primary w-full inline-flex items-center justify-center gap-3 no-underline"
+                      className="w-full inline-flex items-center justify-center !px-6 !py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 shadow-md no-underline"
                     >
-                      <span className="text-xl">📖</span>
+                      <span className="!mr-2">📖</span>
                       Preview Book
                     </a>
                   )}
                   {info.infoLink && (
-                    <a 
-                      href={info.infoLink} 
-                      target="_blank" 
+                    <a
+                      href={info.infoLink}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="button-secondary w-full inline-flex items-center justify-center gap-3 no-underline"
+                      className="w-full inline-flex items-center justify-center !px-6 !py-3 border border-indigo-600 text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 shadow-sm no-underline"
                     >
-                      <span className="text-xl">🛒</span>
+                      <span className="mr-2">🛒</span>
                       View on Google Books
                     </a>
                   )}
@@ -165,91 +178,88 @@ export default function BookDetail() {
               </div>
             </div>
 
-            {/* Book Details Column */}
-            <div className="lg:col-span-3">
-              <div className="space-y-8">
-                {/* Title and Author */}
-                <header className="glass-effect card-modern border-medium">
-                  <h1 className="heading-primary text-white mb-4 leading-tight">
+            <div className="lg:col-span-3 space-y-8">
+
+              <header className={cardBaseClasses}>
+                {info.title && (
+                  <h1 className="text-4xl font-extrabold text-gray-900 leading-tight !mb-3">
                     {info.title}
                   </h1>
-                  {info.subtitle && (
-                    <h2 className="text-2xl text-gray-300 mb-6 font-medium">
-                      {info.subtitle}
-                    </h2>
-                  )}
-                  {info.authors && (
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="text-gray-400">by</span>
-                      <div className="flex flex-wrap gap-2">
-                        {info.authors.map((author, index) => (
-                          <span key={index} className="text-yellow-300 font-semibold text-lg">
-                            {author}{index < info.authors.length - 1 ? ', ' : ''}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  
-                  {/* Categories */}
-                  {info.categories && (
-                    <div className="flex flex-wrap gap-2">
-                      {info.categories.slice(0, 3).map((category, index) => (
-                        <Link
-                          key={index}
-                          to={`/explore?genre=${encodeURIComponent(category)}`}
-                          className="glass-effect px-4 py-2 rounded-2xl text-white text-sm border border-white border-opacity-30 hover:border-opacity-50 transition-colors duration-300 no-underline"
-                        >
-                          {category}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </header>
-
-                {/* Publisher Info */}
-                {info.publisher && (
-                  <section className="glass-effect card-small border-subtle">
-                    <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-                      <span className="text-lg">🏢</span>
-                      Publisher Information
-                    </h3>
-                    <p className="text-body text-gray-300">{info.publisher}</p>
-                    {info.publishedDate && (
-                      <p className="text-small text-gray-400 mt-2">
-                        Published on {new Date(info.publishedDate).toLocaleDateString()}
-                      </p>
-                    )}
-                  </section>
                 )}
-
-                {/* Description */}
-                {info.description && (
-                  <section className="glass-effect card-modern border-medium">
-                    <h3 className="heading-tertiary text-white mb-6 flex items-center gap-3">
-                      <span className="text-2xl">📝</span>
-                      About This Book
-                    </h3>
-                    <div 
-                      className="text-body text-gray-300 leading-relaxed space-y-4"
-                      dangerouslySetInnerHTML={{ 
-                        __html: info.description
-                          .replace(/<br\s*\/?>/gi, '<br/>')
-                          .replace(/<p>/gi, '<p class="mb-4">')
-                          .replace(/<strong>/gi, '<strong class="text-yellow-300 font-semibold">')
-                          .replace(/<em>/gi, '<em class="text-gray-200">')
-                      }}
-                    />
-                  </section>
+                {info.subtitle && (
+                  <p className="text-xl text-gray-600 font-medium !mb-4">
+                    {info.subtitle}
+                  </p>
                 )}
+                {info.authors && info.authors.length > 0 && (
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 !mb-6">
+                    <span className="text-gray-500 text-lg !mr-1">by</span>
+                    {info.authors.map((author, index) => (
+                      <span key={index} className="text-blue-700 font-semibold text-lg hover:underline">
+                        {author}{index < info.authors.length - 1 ? ',' : ''}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {info.categories && info.categories.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {info.categories.slice(0, 3).map((category, index) => (
+                      <Link
+                        key={index}
+                        to={`/explore?genre=${encodeURIComponent(category)}`}
+                        className="px-4 py-2 bg-gray-100 rounded-full text-gray-700 text-sm font-medium hover:bg-gray-200 transition-colors duration-200 no-underline shadow-sm"
+                      >
+                        {category}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </header>
 
-                {/* Additional Details */}
-                <section className="glass-effect card-modern border-medium">
-                  <h3 className="heading-tertiary text-white mb-6 flex items-center gap-3">
-                    <span className="text-2xl">📊</span>
-                    Book Details
+              {/* Description */}
+              {info.description && (
+                <section className={cardBaseClasses}>
+                  <h3 className="text-2xl font-bold text-gray-800 !mb-4 flex items-center gap-3">
+                    <span className="text-blue-500 text-3xl">📝</span>
+                    About This Book
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div
+                    className="text-gray-700 leading-relaxed space-y-4 prose prose-indigo max-w-none"
+                    dangerouslySetInnerHTML={{
+                      __html: info.description
+                        .replace(/<br\s*\/?>/gi, '<br/>')
+                        .replace(/<p>/gi, '<p class="mb-4">')
+                        .replace(/<strong>/gi, '<strong class="font-semibold text-gray-900">')
+                        .replace(/<em>/gi, '<em class="text-gray-600">')
+                    }}
+                  />
+                </section>
+              )}
+
+              {(info.publisher || info.publishedDate) && (
+                <section className={cardBaseClasses}>
+                  <h3 className="text-2xl font-bold text-gray-800 !mb-4 flex items-center gap-3">
+                    <span className="text-green-500 text-3xl">🏢</span>
+                    Publisher Information
+                  </h3>
+                  {info.publisher && (
+                    <p className="text-gray-700 text-lg">{info.publisher}</p>
+                  )}
+                  {info.publishedDate && (
+                    <p className="text-gray-500 text-sm !mt-1">
+                      Published on {new Date(info.publishedDate).toLocaleDateString()}
+                    </p>
+                  )}
+                </section>
+              )}
+
+              {(info.industryIdentifiers || info.pageCount || info.printType || info.maturityRating || info.contentVersion) && (
+                <section className={cardBaseClasses}>
+                  <h3 className="text-2xl font-bold text-gray-800 !mb-4 flex items-center gap-3">
+                    <span className="text-purple-500 text-3xl">📊</span>
+                    More Details
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
                     {[
                       { label: 'ISBN-10', value: info.industryIdentifiers?.find(id => id.type === 'ISBN_10')?.identifier },
                       { label: 'ISBN-13', value: info.industryIdentifiers?.find(id => id.type === 'ISBN_13')?.identifier },
@@ -258,52 +268,53 @@ export default function BookDetail() {
                       { label: 'Maturity Rating', value: info.maturityRating },
                       { label: 'Content Version', value: info.contentVersion }
                     ].filter(item => item.value).map((item, index) => (
-                      <div key={index} className="flex justify-between items-center py-3 border-b border-white border-opacity-10 last:border-b-0">
-                        <span className="text-gray-400 font-medium">{item.label}:</span>
-                        <span className="text-white">{item.value}</span>
+                      <div key={index} className="flex flex-col">
+                        <span className="text-gray-500 text-sm font-medium">{item.label}:</span>
+                        <span className="text-gray-800 text-lg font-semibold">{item.value}</span>
                       </div>
                     ))}
                   </div>
                 </section>
+              )}
 
-                {/* Coming Soon Features */}
-                <section className="glass-effect card-modern border-gradient">
-                  <h3 className="heading-tertiary text-white mb-6 flex items-center gap-3">
-                    <span className="text-2xl">🌟</span>
-                    Coming Soon
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                      {
-                        icon: '📝',
-                        title: 'User Reviews & Ratings',
-                        description: 'Read and write detailed reviews from fellow readers'
-                      },
-                      {
-                        icon: '📚',
-                        title: 'Personal Library',
-                        description: 'Add books to your reading lists and track progress'
-                      },
-                      {
-                        icon: '🎯',
-                        title: 'Smart Recommendations',
-                        description: 'Get personalized book suggestions based on your reading history'
-                      },
-                      {
-                        icon: '👥',
-                        title: 'Book Clubs & Community',
-                        description: 'Join discussions and connect with other book lovers'
-                      }
-                    ].map((feature, index) => (
-                      <div key={index} className="glass-effect p-6 rounded-2xl border border-white border-opacity-20">
-                        <div className="text-3xl mb-3">{feature.icon}</div>
-                        <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
-                        <p className="text-small text-gray-300 leading-relaxed">{feature.description}</p>
+              <section className={`${cardBaseClasses} border-l-4 border-indigo-500`}> {/* Accent border */}
+                <h3 className="text-2xl font-bold text-gray-800 !mb-6 flex items-center gap-3">
+                  <span className="text-yellow-500 text-3xl">🌟</span>
+                  Coming Soon
+                </h3>
+                <div className="grid md:grid-cols-2 !gap-6">
+                  {[
+                    {
+                      icon: '📝',
+                      title: 'User Reviews & Ratings',
+                      description: 'Read and write detailed reviews from fellow readers'
+                    },
+                    {
+                      icon: '📚',
+                      title: 'Personal Library',
+                      description: 'Add books to your reading lists and track progress'
+                    },
+                    {
+                      icon: '🎯',
+                      title: 'Smart Recommendations',
+                      description: 'Get personalized book suggestions based on your reading history'
+                    },
+                    {
+                      icon: '👥',
+                      title: 'Book Clubs & Community',
+                      description: 'Join discussions and connect with other book lovers'
+                    }
+                  ].map((feature, index) => (
+                    <div key={index} className="bg-gray-50 !p-6 rounded-lg shadow-sm flex items-start space-x-4">
+                      <div className="text-4xl">{feature.icon}</div>
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-800 !mb-1">{feature.title}</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
                       </div>
-                    ))}
-                  </div>
-                </section>
-              </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
         </div>
