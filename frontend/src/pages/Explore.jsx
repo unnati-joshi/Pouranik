@@ -45,6 +45,7 @@ export default function Explore() {
           setBooks(response.items || []);
           setTotalItems(response.totalItems || 0);
         } else {
+          console.log(response.items, "this is response items")
           setBooks((prevBooks) => [...prevBooks, ...(response.items || [])]);
         }
         setCurrentPage(page);
