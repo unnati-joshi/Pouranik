@@ -103,6 +103,171 @@ body {
     --content-offset: 80px;
     /* Extra spacing for better visibility - increased further */
 }
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    /* Primary Teal Colors - Adjusted for dark mode */
+    --primary-50: #134e4a;
+    --primary-100: #115e59;
+    --primary-200: #0f766e;
+    --primary-300: #0d9488;
+    --primary-400: #14b8a6;
+    --primary-500: #2dd4bf;
+    --primary-600: #5eead4;
+    --primary-700: #99f6e4;
+    --primary-800: #ccfbf1;
+    --primary-900: #f0fdfa;
+
+    /* Neutral Colors - Dark variants */
+    --neutral-50: #171717;
+    --neutral-100: #262626;
+    --neutral-200: #404040;
+    --neutral-300: #525252;
+    --neutral-400: #737373;
+    --neutral-500: #a3a3a3;
+    --neutral-600: #d4d4d4;
+    --neutral-700: #e5e5e5;
+    --neutral-800: #f5f5f5;
+    --neutral-900: #fafafa;
+/* Fix white icons in dark mode for visibility */
+[data-theme="dark"] .absolute .bg-white,
+[data-theme="dark"] .absolute [style*="color: white"],
+[data-theme="dark"] .backdrop-blur-sm span {
+    color: var(--text-primary) !important;
+    background: var(--neutral-200) !important;
+}
+/* Fix book description panel visibility */
+[data-theme="dark"] .book-detail-panel,
+[data-theme="dark"] .book-description-container,
+[data-theme="dark"] .book-info-panel {
+    background: var(--neutral-200) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Ensure all text in description panels is visible */
+[data-theme="dark"] .book-detail-panel *,
+[data-theme="dark"] .book-description-container *,
+[data-theme="dark"] .book-info-panel * {
+    color: var(--text-primary) !important;
+}
+
+/* Fix any white backgrounds in book details */
+[data-theme="dark"] .bg-white:not(.should-stay-white) {
+    background: var(--neutral-200) !important;
+}
+
+/* Specifically target the highlighted icon area */
+[data-theme="dark"] .absolute.inset-0 .bg-white {
+    background: var(--neutral-200) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Make sure white icons become dark in dark mode */
+[data-theme="dark"] [style*="color: white"]:not(.should-stay-white) {
+    color: var(--text-primary) !important;
+}
+
+    /* Secondary Slate Colors - Dark variants */
+    --secondary-50: #0f172a;
+    --secondary-100: #1e293b;
+    --secondary-200: #334155;
+    --secondary-300: #475569;
+    --secondary-400: #64748b;
+    --secondary-500: #94a3b8;
+    --secondary-600: #cbd5e1;
+    --secondary-700: #e2e8f0;
+    --secondary-800: #f1f5f9;
+    --secondary-900: #f8fafc;
+
+    /* Text colors for dark mode */
+    --text-primary: var(--neutral-900);
+    --text-secondary: var(--neutral-400);
+    --text-muted: var(--neutral-500);
+    
+    /* Border and background adjustments */
+    --border-color: #334155;
+    
+    /* Accent colors stay the same but might need slight adjustments */
+    --accent-orange: #fb923c;
+    --accent-yellow: #fbbf24;
+    --accent-emerald: #34d399;
+    --accent-blue: #60a5fa;
+/* Improve subtitle text brightness */
+[data-theme="dark"] .text-secondary,
+[data-theme="dark"] [style*="color: var(--text-secondary)"] {
+    color: var(--neutral-500) !important; /* Brighter than current --text-secondary */
+}
+
+/* Specifically for book card subtitles */
+[data-theme="dark"] .book-card-hover .text-sm,
+[data-theme="dark"] .book-card-hover p:not(.line-clamp-3) {
+    color: var(--neutral-400) !important; /* Even brighter for better readability */
+}
+/* Enhance button text contrast */
+[data-theme="dark"] .button-primary {
+    background: var(--primary-500);
+    color: white !important;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .button-secondary {
+    background: var(--neutral-200);
+    color: var(--text-primary) !important;
+    border-color: var(--primary-400);
+    font-weight: 600;
+}
+
+/* Theme toggle button text */
+[data-theme="dark"] .theme-toggle {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+
+/* Fix Genre Page Text Visibility in Dark Mode */
+[data-theme="dark"] .page-hero h1,
+[data-theme="dark"] .page-hero p,
+[data-theme="dark"] .heading-tertiary.text-white,
+[data-theme="dark"] .text-white,
+[data-theme="dark"] .text-gray-300 {
+    color: var(--text-primary) !important;
+}
+
+/* Fix Genre Cards Text */
+[data-theme="dark"] .genre-card .heading-tertiary,
+[data-theme="dark"] .genre-card p,
+[data-theme="dark"] .genre-card .text-body {
+    color: var(--text-primary) !important;
+}
+
+/* Popular Combinations Section Fix */
+[data-theme="dark"] .pb-16 h3,
+[data-theme="dark"] .pb-16 p {
+    color: var(--text-primary) !important;
+}
+/* Fix Footer Text Visibility in Dark Mode */
+[data-theme="dark"] .footer-modern,
+[data-theme="dark"] .footer-modern * {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .footer-modern h3,
+[data-theme="dark"] .footer-title {
+    color: var(--primary-400) !important;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .footer-modern a:hover {
+    color: var(--primary-300) !important;
+}
+
+[data-theme="dark"] .footer-bottom {
+    color: var(--text-muted) !important;
+    border-top-color: var(--border-color);
+}
+
+}
+
 
 .app-gradient {
     background: linear-gradient(
@@ -1003,5 +1168,448 @@ body {
         padding: 10px 16px;
     }
 }
+/* Dark Mode Theme Toggle Styles */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    margin-left: 8px;
+}
 
+.theme-toggle:hover {
+    background: var(--primary-50);
+    color: var(--primary-700);
+    border-color: var(--primary-200);
+    transform: translateY(-1px);
+}
+
+.theme-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.theme-label {
+    font-size: 13px;
+}
+
+@media (max-width: 640px) {
+    .theme-toggle {
+        padding: 8px 12px;
+        margin-left: 4px;
+    }
+    
+    .theme-label {
+        display: none;
+    }
+    
+    .theme-icon {
+        font-size: 18px;
+    }
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .app-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--neutral-50) 0%,
+        var(--secondary-100) 50%,
+        var(--primary-100) 100%
+    );
+}
+
+[data-theme="dark"] .navbar-modern {
+    background: var(--neutral-100);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .card-modern,
+[data-theme="dark"] .card-small,
+[data-theme="dark"] .book-card-hover {
+    background: var(--neutral-100);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .input-modern {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .input-modern::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .genre-card {
+    background: var(--neutral-100);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .search-button {
+    background: var(--neutral-100);
+    color: var(--primary-400);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .search-button:hover {
+    background: var(--primary-600);
+    color: var(--neutral-900);
+    border-color: var(--primary-600);
+}
+
+/* Glass effect adjustments for dark mode */
+[data-theme="dark"] .glass-effect {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .glass-effect-strong {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Smooth theme transition */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Preserve specific transition overrides */
+.book-card-hover,
+.navbar-link,
+.button-primary,
+.button-secondary,
+.theme-toggle {
+    transition: all 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+/* Force all white text to be dark in dark mode */
+[data-theme="dark"] * {
+    color: var(--text-primary) !important;
+}
+
+/* Then restore specific elements that should stay white */
+[data-theme="dark"] .button-primary,
+[data-theme="dark"] .bg-gradient-to-r {
+    color: white !important;
+}
+
+}
+/* Universal Dark Mode Text Visibility Fix */
+[data-theme="dark"] {
+  /* Override ALL white text in dark mode */
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] *:not(.preserve-white-text) {
+  color: inherit !important;
+}
+
+/* Specific fixes for white text elements */
+[data-theme="dark"] .text-white,
+[data-theme="dark"] [style*="color: white"],
+[data-theme="dark"] [style*="color:white"],
+[data-theme="dark"] [class*="text-white"] {
+  color: var(--text-primary) !important;
+}
+
+/* Genre page specific fixes */
+[data-theme="dark"] .container-modern h3,
+[data-theme="dark"] .container-modern p,
+[data-theme="dark"] .text-center h3,
+[data-theme="dark"] .text-center p,
+[data-theme="dark"] .pb-16 h3,
+[data-theme="dark"] .pb-16 p {
+  color: var(--text-primary) !important;
+}
+
+/* Footer complete override */
+[data-theme="dark"] .footer-modern,
+[data-theme="dark"] .footer-modern *,
+[data-theme="dark"] .footer-container,
+[data-theme="dark"] .footer-container * {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .footer-title,
+[data-theme="dark"] .footer-modern h3,
+[data-theme="dark"] .footer-modern .footer-title {
+  color: var(--primary-400) !important;
+  font-weight: 700;
+}
+
+/* Elements that should keep white text */
+[data-theme="dark"] .preserve-white-text,
+[data-theme="dark"] .button-primary,
+[data-theme="dark"] .button-primary *,
+[data-theme="dark"] .bg-gradient-to-r.from-blue-600,
+[data-theme="dark"] .rating-badge {
+  color: white !important;
+}
+/* Override ALL inline styles in book cards for dark mode */
+[data-theme="dark"] .book-card-hover * {
+  color: var(--text-primary) !important;
+}
+
+/* Then restore specific elements */
+[data-theme="dark"] .book-card-hover .text-blue-600 {
+  color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .book-card-hover .text-green-500 {
+  color: #10b981 !important;
+}
+
+[data-theme="dark"] .book-card-hover .text-orange-500 {
+  color: #f97316 !important;
+}
+[data-theme="dark"] .book-card-hover .text-yellow-500 {
+  color: #eab308 !important;
+}
+/* Icon backgrounds for maximum visibility */
+[data-theme="dark"] .navbar-link span:first-child {
+    background: var(--neutral-200);
+    border-radius: 8px;
+    padding: 4px 6px;
+    margin-right: 4px;
+}
+
+[data-theme="dark"] .theme-icon {
+    background: var(--primary-100);
+    border-radius: 50%;
+    padding: 4px;
+    border: 1px solid var(--primary-300);
+}
+/* High-contrast button styling for dark mode */
+[data-theme="dark"] .button-primary {
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-400)) !important;
+    color: white !important;
+    border: 2px solid var(--primary-300) !important;
+    font-weight: 800 !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 
+        0 4px 12px rgba(20, 184, 166, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="dark"] .button-secondary {
+    background: var(--neutral-100) !important;
+    color: var(--primary-600) !important;
+    border: 2px solid var(--primary-500) !important;
+    font-weight: 800 !important;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Enhanced hover effects */
+[data-theme="dark"] .button-primary:hover {
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-300)) !important;
+    box-shadow: 
+        0 8px 20px rgba(20, 184, 166, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+}
+
+[data-theme="dark"] .button-secondary:hover {
+    background: var(--primary-50) !important;
+    color: var(--primary-700) !important;
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-3px) scale(1.02) !important;
+}
+/* Change book card backgrounds to darker colors in dark mode */
+[data-theme="dark"] .book-card-hover,
+[data-theme="dark"] article[class*="bg-white"] {
+    background: var(--neutral-200) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Dark background for the bottom section */
+[data-theme="dark"] .book-card-hover .bg-white {
+    background: var(--neutral-200) !important;
+}
+
+/* Dark background for info sections */
+[data-theme="dark"] .bg-gray-50 {
+    background: var(--neutral-300) !important;
+}
+
+[data-theme="dark"] .bg-gray-100 {
+    background: var(--neutral-300) !important;
+}
+
+/* Ensure image placeholder areas work too */
+[data-theme="dark"] .bg-gradient-to-br.from-gray-50 {
+    background: linear-gradient(to bottom right, var(--neutral-300), var(--neutral-400)) !important;
+}
+/* Complete footer dark mode overhaul */
+[data-theme="dark"] .footer-modern,
+[data-theme="dark"] footer,
+[data-theme="dark"] [class*="footer"] {
+    background: var(--neutral-200) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Footer headers and titles */
+[data-theme="dark"] .footer-modern h1,
+[data-theme="dark"] .footer-modern h2,
+[data-theme="dark"] .footer-modern h3,
+[data-theme="dark"] .footer-modern h4,
+[data-theme="dark"] .footer-title,
+[data-theme="dark"] footer h1,
+[data-theme="dark"] footer h2,
+[data-theme="dark"] footer h3 {
+    color: var(--primary-400) !important;
+    font-weight: 700 !important;
+}
+
+/* All footer text elements */
+[data-theme="dark"] .footer-modern *,
+[data-theme="dark"] footer * {
+    color: var(--text-secondary) !important;
+}
+
+/* Footer links */
+[data-theme="dark"] .footer-modern a,
+[data-theme="dark"] footer a {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .footer-modern a:hover,
+[data-theme="dark"] footer a:hover {
+    color: var(--primary-300) !important;
+}
+/* Universal BookDetail dark mode fix */
+[data-theme="dark"] .min-h-screen.bg-gray-50 * {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-white"] {
+    background: var(--neutral-200) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-gray-50"] {
+    background: var(--neutral-300) !important;
+}
+
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-blue-50"],
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-green-50"],
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-yellow-50"],
+[data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-purple-50"] {
+    background: var(--neutral-300) !important;
+    border: 1px solid var(--border-color) !important;
+}
+/* Complete BookCard component dark mode fix */
+[data-theme="dark"] article.bg-white {
+    background: var(--neutral-200) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Image area background */
+[data-theme="dark"] .bg-gradient-to-br.from-gray-50 {
+    background: linear-gradient(to bottom right, var(--neutral-300), var(--neutral-400)) !important;
+}
+
+/* No cover placeholder */
+[data-theme="dark"] .bg-gradient-to-br.from-indigo-100 {
+    background: var(--neutral-300) !important;
+    color: var(--text-secondary) !important;
+}
+
+/* Text content area */
+[data-theme="dark"] .bg-white.flex-1 {
+    background: var(--neutral-200) !important;
+}
+
+/* All text elements in BookCard */
+[data-theme="dark"] .text-gray-900 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-gray-600 {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .text-gray-500 {
+    color: var(--text-muted) !important;
+}
+
+/* Info section background */
+[data-theme="dark"] .bg-gray-50 {
+    background: var(--neutral-300) !important;
+}
+
+/* Language tag */
+[data-theme="dark"] .bg-gray-100 {
+    background: var(--neutral-400) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Hover overlay */
+[data-theme="dark"] .bg-white\/95 {
+    background: rgba(64, 64, 64, 0.95) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .text-gray-800 {
+    color: var(--text-primary) !important;
+}
+/* Enhanced footer text brightness in dark mode */
+[data-theme="dark"] .footer-modern,
+[data-theme="dark"] footer,
+[data-theme="dark"] [class*="footer"] {
+    background: var(--neutral-200) !important;
+    color: var(--text-primary) !important; /* Changed from text-secondary to text-primary */
+}
+
+/* Footer headers and titles - even brighter */
+[data-theme="dark"] .footer-modern h1,
+[data-theme="dark"] .footer-modern h2,
+[data-theme="dark"] .footer-modern h3,
+[data-theme="dark"] .footer-modern h4,
+[data-theme="dark"] .footer-title,
+[data-theme="dark"] footer h1,
+[data-theme="dark"] footer h2,
+[data-theme="dark"] footer h3 {
+    color: var(--primary-300) !important; /* Brighter teal */
+    font-weight: 700 !important;
+}
+
+/* All footer text elements - brighter */
+[data-theme="dark"] .footer-modern *,
+[data-theme="dark"] footer * {
+    color: var(--text-primary) !important; /* Changed from text-secondary */
+}
+
+/* Footer links - bright and readable */
+[data-theme="dark"] .footer-modern a,
+[data-theme="dark"] footer a {
+    color: var(--neutral-600) !important; /* Brighter than before */
+}
+
+[data-theme="dark"] .footer-modern a:hover,
+[data-theme="dark"] footer a:hover {
+    color: var(--primary-200) !important; /* Very bright on hover */
+}
+
+/* Footer bottom section */
+[data-theme="dark"] .footer-bottom {
+    color: var(--neutral-500) !important; /* Brighter than text-muted */
+    border-top-color: var(--border-color);
+}
 

@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ isDarkMode, toggleTheme }) {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
@@ -32,6 +32,20 @@ export default function Navbar() {
               <span>{label}</span>
             </Link>
           ))}
+          
+          {/* Dark Mode Toggle */}
+          <button 
+            onClick={toggleTheme}
+            className="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span className="theme-icon">
+              {isDarkMode ? '☀️' : '🌙'}
+            </span>
+            <span className="theme-label">
+              {isDarkMode ? 'Light' : 'Dark'}
+            </span>
+          </button>
         </div>
       </div>
     </nav>
