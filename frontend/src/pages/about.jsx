@@ -3,110 +3,108 @@ import React from "react";
 export default function AboutUs() {
   const sections = [
     {
-      title: " What's Pouranik? ",
-      bg: "bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50",
-      borderColor: "border-indigo-200",
-      glowColor: "shadow-indigo-200/50",
-      textColor: "text-indigo-700",
+      title: "📚 Pouranik - Read. Share. Connect.",
+      content: `Welcome to Pouranik, an open-source book exploration and reading habit platform for everyone who loves books and stories. Whether you're into self-help, fantasy, biographies, or technology, this is your cozy digital library and community corner.`,
+    },
+    {
+      title: "🔍 What's Pouranik?",
+      content: `Pouranik is a web platform where you can:
+• Search and explore books from public APIs (like Google Books)
+• Browse genres and discover hidden gems
+• Write reviews and read what others say
+• Join book groups, share your thoughts, and build reading circles
+• Buy and sell second-hand books
+• Set reading goals and finish books with a personal timer
+• Chat with group members, like a digital book club!
 
-      content: ` Pouranik is an open-source platform that celebrates the love for reading. Whether you're into fantasy, self-help, or tech—this is your cozy digital library. Search books, write reviews, join clubs, set reading goals, and even buy/sell second-hand books.`,
+It’s more than a reading app. It’s your reading journey, tracked and shared.`,
     },
     {
-      title: " Why the Name 'Pouranik'?",
-      bg: "bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50",
-      borderColor: "border-amber-200",
-      glowColor: "shadow-amber-200/50",
-      textColor: "text-amber-700",
-      content: ` "Pouranik" is derived from the Sanskrit word Paurāṇika, meaning ancient or timeless. Stories are eternal—this platform brings readers together to rediscover that timeless magic. `,
+      title: "🧠 Why the name 'Pouranik'?",
+      content: `The name "Pouranik" comes from the Sanskrit word *Paurāṇika*, meaning ancient, mythical, or timeless. 
+
+We chose this name because stories—whether from ancient scriptures or modern fiction—are timeless. Pouranik is built on that idea: to help people connect with the magic of reading, share thoughts, and grow together through books.`,
     },
     {
-      title: " Features",
-      bg: "bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50",
-      borderColor: "border-emerald-200",
-      glowColor: "shadow-emerald-200/50",
-      textColor: "text-emerald-700",
-      content: ` • Search and explore books via APIs\n • Browse genres and discover gems\n • Read & write reviews\n• Join book clubs and group chats\n • Set reading goals with timers\n• Buy/sell second-hand books\n• User profiles & reading shelves`,
+      title: "🚀 Features (and what's coming!)",
+      content: `• Book search with API integration (Google Books/Open Library)
+• Genre-based sections: Fiction, Self-help, Tech, etc.
+• Book detail page with summary, rating, and reviews
+• User reviews system
+• Book clubs and group pages
+• Messaging in groups (coming soon!)
+• Sell/buy second-hand books
+• Reading goals and timer tracker
+• User profiles and reading shelves (To-Read, Finished)
+• Language and accessibility support
+
+✨ Want to help bring these features to life? Scroll to the contributions section!`,
     },
     {
-      title: " Tech Stack",
-      bg: "bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50",
-      borderColor: "border-rose-200",
-      glowColor: "shadow-rose-200/50",
-      textColor: "text-rose-700",
-      content: ` • Frontend: React + Tailwind\n • API: Google Books / OpenLibrary\n• Backend: Node.js + Express (planned)\n• Database: MongoDB / Firebase (planned)\n• Hosting: Vercel / Render`,
+      title: "🛠️ Tech Stack",
+      content: `Frontend: React + Tailwind CSS  
+API: Google Books API / OpenLibrary API  
+Backend: Node.js + Express (planned)  
+Database: MongoDB / Firebase (planned)  
+Hosting: Vercel / Render`,
     },
     {
-      title: " Community",
-      bg: "bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50",
-      borderColor: "border-violet-200",
-      glowColor: "shadow-violet-200/50",
-      textColor: "text-violet-700",
-      content: ` Pouranik is built with ❤️ by contributors and book lovers.\nGitHub Discussions & Discord launching soon for feedback, collaboration, and more!`,
+      title: "🤝 Contributing to Pouranik",
+      content: `We welcome all contributors! Whether you're a beginner or experienced dev, there's always something you can do.
+
+You Can Contribute By:  
+• Adding UI components  
+• Improving CSS/responsiveness  
+• Creating or editing content (genres, book data)  
+• Fixing bugs or typos  
+• Writing documentation  
+• Adding new features (like messaging or timer)`,
+    },
+    {
+      title: "🏷️ Labels You’ll See",
+      content: `• \`good first issue\`: Perfect for beginners  
+• \`design\`: UI/UX related tasks  
+• \`feature\`: New functionality  
+• \`bug\`: Something’s not working  
+• \`documentation\`: Improve README, guides, etc.`,
+    },
+    {
+      title: "🌐 Community and Support",
+      content: `We’ll soon launch GitHub Discussions and a Discord channel for connecting, asking questions, and brainstorming features. Stay tuned!`,
+    },
+    {
+      title: "📖 Inspired By...",
+      content: `Every reader who ever felt seen in a story. Let’s build this platform for curious minds across the world.`,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-gray-50 text-gray-800 pb-20">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 via-purple-600/10 to-pink-600/10"></div>
-        <div className="relative px-4 sm:px-6 py-12 sm:py-16 md:py-20 text-center">
-          <div className="animate-pulse duration-2000">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4 sm:mb-6">
-              📚 Pouranik
-            </h1>
-          </div>
-        <div className="flex items-center justify-center w-full h-32">
-          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 font-light text-center">
-  Where timeless stories meet modern readers
-</p>
-            </div>
-          <div className="mt-6 sm:mb-8 w-24 sm:w-32 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mx-auto"></div>
-        </div>
-      </div>
-      <div className="margin-bottom-12"></div>
+    <div className="min-h-screen bg-white text-gray-800 font-sans section-padding">
+      <div className="container-md">
+        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: 'var(--primary-700)' }}>
+          About <span style={{ color: 'var(--accent-orange)' }}>Pouranik</span>
+        </h1>
 
-      {/* Main Content */}
-<div className="py-12 sm:py-16 md:py-20 w-full flex justify-center items-center flex-col">
-  <div className="flex flex-col items-center gap-12 w-full">
-    {sections.map((section, index) => (
-      <div
-        key={index}
-        className={`group relative overflow-hidden ${section.bg} ${section.borderColor} border-2 rounded-2xl px-10 py-14 sm:px-14 sm:py-16 md:px-20 md:py-20 w-full max-w-4xl mx-auto transition-transform duration-500 hover:scale-[1.02] hover:${section.glowColor} hover:shadow-2xl`}
-        style={{
-          animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
-        }}
-      >
-              {/* Glow Effects */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-white/30 to-transparent rounded-full transform translate-x-12 -translate-y-12 group-hover:scale-150 transition-transform duration-700"></div>
-              <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-white/20 to-transparent rounded-full transform -translate-x-10 translate-y-10 group-hover:scale-125 transition-transform duration-700"></div>
-
-              {/* Text */}
-              <div className="relative z-10 text-center">
-                <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-6 ${section.textColor}`}>
-                  {section.title}
-                </h2>
-                <div className="text-gray-700 text-base sm:text-lg md:text-xl leading-relaxed space-y-4 text-center">
-                  {section.content.split("\n").map((line, i) => (
-                    <p 
-                      key={i}
-                      className={`group relative overflow-hidden ${section.bg} ${section.borderColor} border-2 rounded-2xl px-10 py-14 sm:px-14 sm:py-16 md:px-20 md:py-20 w-full max-w-4xl mx-auto transition-transform duration-500 hover:scale-[1.02] hover:${section.glowColor} hover:shadow-2xl`}
-  style={{
-    animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
-  }}
-                    >
-                      {line}
-                    </p>
-                  ))}
-                </div>
-              </div>
+        <div className="grid gap-10">
+          {sections.map((sec, index) => (
+            <div
+              key={index}
+              className="card-modern p-8 md:p-10 fade-in"
+              style={{
+                background: 'linear-gradient(135deg, var(--primary-50), var(--primary-100))',
+                border: '1px solid var(--primary-200)',
+              }}
+            >
+              <h2 className="text-2xl font-semibold mb-3" style={{ color: 'var(--primary-700)' }}>
+                {sec.title}
+              </h2>
+              <pre className="text-lg leading-relaxed whitespace-pre-wrap" style={{ color: 'var(--text-secondary)' }}>
+                {sec.content}
+              </pre>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Add spacing before footer */}
-      <div className="h-12 sm:h-16"></div>
     </div>
   );
 }
