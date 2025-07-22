@@ -21,7 +21,7 @@ We welcome all contributors! Whether you're a beginner or experienced dev, there
 git checkout -b fix/your-feature-name
 ```
 
-4. Make you changes and push:
+4. Make your changes and push:
 
 ```bash
 git push origin fix/your-feature-name
@@ -29,6 +29,6 @@ git push origin fix/your-feature-name
 
 5. Open a Pull Request to `main` branch.
 
-> Make sure to **link your PR to the issue** mentioning **Fixes #issue_number** in the description.
+**Make sure to **link your PR to the issue** mentioning **Fixes #issue_number** in the description.**
 
 ---
