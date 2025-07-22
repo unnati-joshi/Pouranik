@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { searchBooks } from "../services/bookService";
+import { searchBooks, getAutocompleteSuggestions } from "../services/bookService";
 import BookCard from "../components/BookCard";
 import NoBookFound from "../components/NoBookFound";
+import SearchAutocomplete from "../components/SearchAutocomplete";
 
 export default function Explore() {
   const [query, setQuery] = useState("");
@@ -10,11 +11,54 @@ export default function Explore() {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [searchParams] = useSearchParams();
+  const [suggestions, setSuggestions] = useState([]);
+  const [loadingSuggestions, setLoadingSuggestions] = useState(false);
+  const [searchType, setSearchType] = useState('books'); // 'books' or 'authors'
+  const debounceTimerRef = useRef(null);
 
   //pagination state
   const [currentPage, setCurrentPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const maxResultsPerPage = 10;
+
+  // Function to debounce the autocomplete API calls
+  const debouncedGetSuggestions = useCallback(async (searchQuery) => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+
+    if (!searchQuery.trim()) {
+      setSuggestions([]);
+      return;
+    }
+
+    debounceTimerRef.current = setTimeout(async () => {
+      setLoadingSuggestions(true);
+      try {
+        const results = await getAutocompleteSuggestions(searchQuery, searchType);
+        setSuggestions(results);
+      } catch (error) {
+        console.error("Error getting suggestions:", error);
+        setSuggestions([]);
+      } finally {
+        setLoadingSuggestions(false);
+      }
+    }, 300); // 300ms delay
+  }, [searchType]);
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    debouncedGetSuggestions(value);
+  };
+
+  // Handle suggestion selection
+  const handleSuggestionSelect = (suggestion) => {
+    setQuery(suggestion.text);
+    setSuggestions([]); // Clear suggestions
+    handleSearch(null, suggestion.text); // Trigger search with selected suggestion
+  };
 
   /**
    * @function handleSearch
@@ -32,11 +76,14 @@ export default function Explore() {
 
       setLoading(true);
       setSearched(true);
+      setSuggestions([]); // Clear suggestions when search is triggered
 
       try {
         const startIndex = page * maxResultsPerPage;
+        // If searching for authors, add the inauthor: prefix
+        const finalQuery = searchType === 'authors' ? `inauthor:${searchQuery}` : searchQuery;
         const response = await searchBooks(
-          searchQuery,
+          finalQuery,
           startIndex,
           maxResultsPerPage
         );
@@ -45,7 +92,6 @@ export default function Explore() {
           setBooks(response.items || []);
           setTotalItems(response.totalItems || 0);
         } else {
-          console.log(response.items, "this is response items")
           setBooks((prevBooks) => [...prevBooks, ...(response.items || [])]);
         }
         setCurrentPage(page);
@@ -57,7 +103,7 @@ export default function Explore() {
         setLoading(false);
       }
     },
-    [query, maxResultsPerPage]
+    [query, maxResultsPerPage, searchType]
   );
 
   // Handle genre filtering from URL params
@@ -130,16 +176,57 @@ export default function Explore() {
             <div className="glass-effect-strong card-modern border-medium">
               <form onSubmit={handleSearch} className="w-full max-w-2xl mx-auto">
                 <div className="relative w-full">
-                  <input
-                    className="input-modern w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="text"
-                    placeholder="Search for Books,Authors..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
+                  {/* Search Type Toggle */}
+                  <div className="flex justify-center mb-6">
+                    <div className="search-type-toggle">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchType('books');
+                          setQuery('');
+                          setSuggestions([]);
+                        }}
+                        className={`search-type-button ${searchType === 'books' ? 'active' : ''}`}
+                      >
+                        <span className="text-lg">📚</span>
+                        Search by Title
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSearchType('authors');
+                          setQuery('');
+                          setSuggestions([]);
+                        }}
+                        className={`search-type-button ${searchType === 'authors' ? 'active' : ''}`}
+                      >
+                        <span className="text-lg">✍️</span>
+                        Search by Author
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <input
+                      className="input-modern w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      type="text"
+                      placeholder={searchType === 'books' ? "Search for book titles..." : "Search for authors..."}
+                      value={query}
+                      onChange={handleInputChange}
+                      autoComplete="off"
+                    />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-2xl pointer-events-none">
+                      {searchType === 'books' ? '📚' : '✍️'}
+                    </span>
+                  </div>
+                  
+                  {/* Autocomplete Dropdown */}
+                  <SearchAutocomplete
+                    suggestions={suggestions}
+                    onSelect={handleSuggestionSelect}
+                    loading={loadingSuggestions}
+                    activeType={searchType}
                   />
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-2xl pointer-events-none">
-                    🔍
-                  </span>
                 </div>
                 <button
                   type="submit"
@@ -153,8 +240,8 @@ export default function Explore() {
                     </span>
                   ) : (
                     <span className="flex items-center justify-center gap-3">
-                      <span className="text-xl">📚</span>
-                      Search Books
+                      <span className="text-xl">🔍</span>
+                      Search {searchType === 'books' ? 'Books' : 'by Author'}
                     </span>
                   )}
                 </button>
