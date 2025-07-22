@@ -49,3 +49,64 @@ export const searchBooks = async (
     return { items: [], totalItems: 0 };
   }
 };
+
+/**
+ * @function getAutocompleteSuggestions
+ * @param {string} query The search query to get suggestions for
+ * @param {string} type The type of suggestions to get ('books' or 'authors')
+ * @returns {Promise<Array>} Array of suggestion objects
+ * @description Fetches autocomplete suggestions for books or authors based on the query
+ */
+export const getAutocompleteSuggestions = async (query, type = 'books') => {
+  if (!query.trim()) return [];
+
+  const apiKey = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
+  if (!apiKey || apiKey === "your_api_key_here") {
+    console.error("Google Books API key is not configured");
+    return [];
+  }
+
+  try {
+    // For authors, we specifically search in the author field
+    const searchQuery = type === 'authors' ? `inauthor:${query}` : query;
+    const encodedQuery = encodeURIComponent(searchQuery);
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodedQuery}&maxResults=5&fields=items(id,volumeInfo(title,authors))&key=${apiKey}`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+
+    const data = await res.json();
+    if (!data.items) return [];
+
+    // Process the results based on type
+    if (type === 'authors') {
+      // Extract unique authors from the results
+      const authors = new Set();
+      data.items.forEach(item => {
+        if (item.volumeInfo.authors) {
+          item.volumeInfo.authors.forEach(author => {
+            if (author.toLowerCase().includes(query.toLowerCase())) {
+              authors.add(author);
+            }
+          });
+        }
+      });
+      return Array.from(authors).slice(0, 5).map(author => ({
+        id: author,
+        text: author,
+        type: 'author'
+      }));
+    } else {
+      // Return book suggestions
+      return data.items.map(item => ({
+        id: item.id,
+        text: item.volumeInfo.title,
+        type: 'book',
+        authors: item.volumeInfo.authors || []
+      }));
+    }
+  } catch (error) {
+    console.error("Error fetching suggestions:", error);
+    return [];
+  }
+};

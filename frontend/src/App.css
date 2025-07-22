@@ -889,6 +889,74 @@ body {
     margin-top: 24px;
 }
 
+/* Search Type Toggle */
+.search-type-toggle {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 4px;
+    border-radius: 100px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    gap: 4px;
+}
+
+.search-type-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.search-type-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.search-type-button.active {
+    background: white;
+    color: var(--primary-700);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 640px) {
+    .search-type-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-type-button {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* Spinner for autocomplete */
+.spinner-small {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-200);
+    border-top-color: var(--primary-600);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 /* Popular searches section with larger gap */
 .popular-searches-section {
     margin-top: 1rem;
