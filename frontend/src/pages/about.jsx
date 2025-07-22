@@ -21,9 +21,9 @@ It’s more than a reading app. It’s your reading journey, tracked and shared.
     },
     {
       title: "🧠 Why the name 'Pouranik'?",
-      content: `The name "Pouranik" comes from the Sanskrit word *Paurāṇika*, meaning ancient, mythical, or timeless. 
+      content: `The name "Pouranik" comes from the Sanskrit word Paurāṇika, meaning ancient, mythical, or timeless. 
 
-We chose this name because stories—whether from ancient scriptures or modern fiction—are timeless. Pouranik is built on that idea: to help people connect with the magic of reading, share thoughts, and grow together through books.`,
+We chose this name because stories, whether from ancient scriptures or modern fiction are timeless. Pouranik is built on that idea: to help people connect with the magic of reading, share thoughts, and grow together through books.`,
     },
     {
       title: "🚀 Features (and what's coming!)",
@@ -39,34 +39,6 @@ We chose this name because stories—whether from ancient scriptures or modern f
 • Language and accessibility support
 
 ✨ Want to help bring these features to life? Scroll to the contributions section!`,
-    },
-    {
-      title: "🛠️ Tech Stack",
-      content: `Frontend: React + Tailwind CSS  
-API: Google Books API / OpenLibrary API  
-Backend: Node.js + Express (planned)  
-Database: MongoDB / Firebase (planned)  
-Hosting: Vercel / Render`,
-    },
-    {
-      title: "🤝 Contributing to Pouranik",
-      content: `We welcome all contributors! Whether you're a beginner or experienced dev, there's always something you can do.
-
-You Can Contribute By:  
-• Adding UI components  
-• Improving CSS/responsiveness  
-• Creating or editing content (genres, book data)  
-• Fixing bugs or typos  
-• Writing documentation  
-• Adding new features (like messaging or timer)`,
-    },
-    {
-      title: "🏷️ Labels You’ll See",
-      content: `• \`good first issue\`: Perfect for beginners  
-• \`design\`: UI/UX related tasks  
-• \`feature\`: New functionality  
-• \`bug\`: Something’s not working  
-• \`documentation\`: Improve README, guides, etc.`,
     },
     {
       title: "🌐 Community and Support",
