@@ -62,16 +62,18 @@ Want to help bring these features to life? **Scroll to the contributions section
   <img src="https://contrib.rocks/image?repo=bhaktimore18/pouranik" />
 </a>
 
-## Inspired By...
-
-Every reader who ever felt seen in a story. Let's build this platform for curious minds across the world.
-
 ---
 
 ## Maintainers
 
 - Maintained with ❤️ by the **Pouranik Core Team**  
   Lead: [@bhaktimore18](https://github.com/BhaktiMore18)
+
+---
+
+## Inspired By...
+
+Every reader who ever felt seen in a story. Let's build this platform for curious minds across the world.
 
 ---
 
