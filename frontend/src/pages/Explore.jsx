@@ -4,6 +4,7 @@ import { searchBooks, getAutocompleteSuggestions } from "../services/bookService
 import BookCard from "../components/BookCard";
 import NoBookFound from "../components/NoBookFound";
 import SearchAutocomplete from "../components/SearchAutocomplete";
+import Pagination from "../components/Pagination";
 
 export default function Explore() {
   const [query, setQuery] = useState("");
@@ -16,10 +17,26 @@ export default function Explore() {
   const [searchType, setSearchType] = useState('books'); // 'books' or 'authors'
   const debounceTimerRef = useRef(null);
 
-  //pagination state
-  const [currentPage, setCurrentPage] = useState(0);
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1); // Changed to 1-based for UI
   const [totalItems, setTotalItems] = useState(0);
   const maxResultsPerPage = 10;
+
+  // Calculate total pages
+  const totalPages = Math.ceil(totalItems / maxResultsPerPage);
+
+  // Function to handle page changes
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+      handleSearch(null, query, newPage - 1); // Convert to 0-based for API
+      // Scroll to top of results
+      const resultsSection = document.querySelector('.results-section');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   // Function to debounce the autocomplete API calls
   const debouncedGetSuggestions = useCallback(async (searchQuery) => {
@@ -88,13 +105,9 @@ export default function Explore() {
           maxResultsPerPage
         );
 
-        if (page === 0) {
-          setBooks(response.items || []);
-          setTotalItems(response.totalItems || 0);
-        } else {
-          setBooks((prevBooks) => [...prevBooks, ...(response.items || [])]);
-        }
-        setCurrentPage(page);
+        setBooks(response.items || []);
+        setTotalItems(response.totalItems || 0);
+        setCurrentPage(page + 1); // Convert to 1-based for UI
       } catch (error) {
         console.error("Failed to fetch books:", error);
         setBooks([]);
@@ -134,18 +147,6 @@ export default function Explore() {
     setQuery(term);
     handleSearch({ preventDefault: () => { } }, term);
   };
-
-  /**
-   * @function handleLoadMore
-   * @description This function handles loading more books when the user clicks the "Load More"
-   * button. It increments the current page and fetches the next set of results.
-   * It uses the current query and page state to fetch the next set of books.
-   */
-  const handleLoadMore = () => {
-    handleSearch(null, query, currentPage + 1);
-  };
-
-  const hasMoreBooks = books.length < totalItems;
 
   return (
     <React.Fragment>
@@ -272,7 +273,7 @@ export default function Explore() {
         </section>
 
         {/* Results Section */}
-        <section className="pb-16">
+        <section className="pb-16 results-section">
           <div className="container-modern flex flex-col items-center">
             {/* Loading State */}
             {loading && (
@@ -381,38 +382,13 @@ export default function Explore() {
                   ))}
                 </div>
 
-                {hasMoreBooks && (
-                  <div className="text-center !mt-12">
-                    <button
-                      onClick={handleLoadMore}
-                      className={`button-primary ${loading ? "opacity-50 cursor-not-allowed" : ""
-                        }`}
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <span className="flex items-center justify-center gap-3">
-                          <div className="spinner" /> Loading More Books...
-                        </span>
-                      ) : (
-                        "Load More"
-                      )}
-                    </button>
-                  </div>
-                )}
-
-                {!hasMoreBooks && searched && books.length > 0 && (
-                  <div className="text-center">
-                    <div className="glass-effect card-small max-w-md mx-auto border-subtle">
-                      <p className="text-body text-gray-300 mb-4">
-                        You've reached the end of the results for your search.
-                      </p>
-                      <p className="text-small text-gray-400">
-                        That's all the amazing books we could find!
-                      </p>
-                    </div>
-                  </div>
-                )}
-
+                {/* Pagination */}
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                  loading={loading}
+                />
               </div>
             )}
 
@@ -447,7 +423,6 @@ export default function Explore() {
               </div>
             )}
           </div>
-
         </section>
       </div>
 
