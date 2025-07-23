@@ -1,3 +1,40 @@
+## Getting Started
+
+### 1. Fork the Repository
+
+Click the `Fork` button on the top-right to create your own copy.
+
+### 2. Clone the Repo
+
+```bash
+git clone https://github.com/BhaktiMore18/pouranik.git
+cd pouranik
+```
+
+### 3. Install Dependencies
+
+```bash
+npm install
+```
+
+### 4. Add your Environmental Variables
+
+Create a .env file:
+
+```bash
+VITE_GOOGLE_BOOKS_API_KEY=your_api_key
+```
+
+### 5. Run the Dev Server
+
+```bash
+npm run dev
+```
+
+Go to `http://localhost:5173` and explore Pouranik!
+
+---
+
 ## Contributing to Pouranik
 
 We welcome all contributors! Whether you're a beginner or experienced dev, there's always something you can do.
@@ -21,7 +58,7 @@ We welcome all contributors! Whether you're a beginner or experienced dev, there
 git checkout -b fix/your-feature-name
 ```
 
-4. Make your changes and push:
+4. Make you changes and push:
 
 ```bash
 git push origin fix/your-feature-name
@@ -29,6 +66,4 @@ git push origin fix/your-feature-name
 
 5. Open a Pull Request to `main` branch.
 
-**Make sure to **link your PR to the issue** mentioning **Fixes #issue_number** in the description.**
-
----
+> Make sure to **link your PR to the issue** mentioning **Fixes #issue_number** in the description.

@@ -57,103 +57,10 @@ Want to help bring these features to life? **Scroll to the contributions section
 | Hosting  | Vercel / Render                    |
 
 ---
-
-## Getting Started
-
-### 1. Fork the Repository
-
-Click the `Fork` button on the top-right to create your own copy.
-
-### 2. Clone the Repo
-
-```bash
-git clone https://github.com/BhaktiMore18/pouranik.git
-cd pouranik
-```
-
-### 3. Install Dependencies
-
-```bash
-npm install
-```
-
-### 4. Add your Environmental Variables
-
-Create a .env file:
-
-```bash
-VITE_GOOGLE_BOOKS_API_KEY=your_api_key
-VITE_BACKEND_URL=https://your-backend-url.com
-```
-
-### 5. Run the Dev Server
-
-```bash
-npm run dev
-```
-
-Go to `http://localhost:5173` and explore Pouranik!
-
----
-
-## Contributing to Pouranik
-
-We welcome all contributors! Whether you're a beginner or experienced dev, there's always something you can do.
-
-### You Can Contribute By:
-
-- Adding UI components
-- Improving CSS/ responsiveness
-- Creating or editing content (genres, book data)
-- Fixing bugs or typos
-- Writing documentation
-- Adding a new feature (like messaging or timer)
-
-### Our Git Workflow
-
-1. Pick an issue from the Issues tab (or open a new one!)
-2. Comment to get assigned
-3. Create a new branch:
-
-```bash
-git checkout -b fix/your-feature-name
-```
-
-4. Make you changes and push:
-
-```bash
-git push origin fix/your-feature-name
-```
-
-5. Open a Pull Request to `main` branch.
-
-> Make sure to **link your PR to the issue** mentioning **Fixes #issue_number** in the description.
-
----
-
-## Folder Structure
-
-## will add soon!
-
-## Labels You’ll See
-
-- `good first issue`: Perfect for beginners
-- `design`: UI/UX related tasks
-- `feature`: New functionality
-- `bug`: Something’s not working
-- `documentation`: Improve README, guides, etc
-
----
-
-## Community and Support
-
-We’ll soon launch GitHub Discussions and a Discord channel for connecting, asking questions, and brainstorming features. Stay tuned!
-
----
-
-## Inspired By...
-
-Every reader who ever felt seen in a story. Let's build this platform for curious minds across the world.
+## Our Contributors
+<a href="https://github.com/bhaktimore18/pouranik/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=bhaktimore18/pouranik" />
+</a>
 
 ---
 
@@ -161,6 +68,12 @@ Every reader who ever felt seen in a story. Let's build this platform for curiou
 
 - Maintained with ❤️ by the **Pouranik Core Team**  
   Lead: [@bhaktimore18](https://github.com/BhaktiMore18)
+
+---
+
+## Inspired By...
+
+Every reader who ever felt seen in a story. Let's build this platform for curious minds across the world.
 
 ---
 
