@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Search, BookMarked, Library, LibraryBigIcon, BookOpen } from 'lucide-react';
+import { Home, Search, BookMarked, BookOpen } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
