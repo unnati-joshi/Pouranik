@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from '../pages/Home';
 import Explore from '../pages/Explore';
 import AboutUs from '../pages/about';
+import Library from '../pages/Library';
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
       <Route path="/genres" element={<Genres />} />
       <Route path="/explore" element={<Explore />} />
       <Route path="/about" element={<AboutUs />} />
+      <Route path='/library' element={<Library />} />
     </Routes>
   );
 }
