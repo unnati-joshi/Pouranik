@@ -9,46 +9,52 @@ import React from 'react';
  * @param {boolean} props.loading Whether data is being loaded
  * @returns {JSX.Element}
  */
-export default function Pagination({ currentPage, totalPages, onPageChange, loading }) {
+export default function Pagination({ currentPage, totalPages: rawTotalPages, onPageChange, loading }) {
+  // Limit total pages to 40
+  const totalPages = Math.min(rawTotalPages, 40);
+
   // Don't render pagination if there's only one page or no pages
   if (totalPages <= 1) return null;
 
   // Calculate the range of page numbers to show
   const getPageNumbers = () => {
-    const delta = 2; // Number of pages to show on each side of current page
     const range = [];
-    const rangeWithDots = [];
-
+    
     // Always show first page
     range.push(1);
-
-    // Calculate the range of pages to show
-    for (let i = currentPage - delta; i <= currentPage + delta; i++) {
-      if (i > 1 && i < totalPages) {
+    
+    if (totalPages <= 7) {
+      // If total pages is 7 or less, show all pages
+      for (let i = 2; i < totalPages; i++) {
         range.push(i);
       }
+    } else {
+      // For current page near the start
+      if (currentPage <= 3) {
+        range.push(2, 3, 4, '...', totalPages - 1);
+      }
+      // For current page near the end
+      else if (currentPage >= totalPages - 2) {
+        range.push('...', totalPages - 3, totalPages - 2, totalPages - 1);
+      }
+      // For current page in the middle
+      else {
+        range.push(
+          '...',
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          '...'
+        );
+      }
     }
-
-    // Always show last page
+    
+    // Always show last page if more than one page
     if (totalPages !== 1) {
       range.push(totalPages);
     }
 
-    // Add dots where needed
-    let prev = 0;
-    for (const i of range) {
-      if (prev) {
-        if (i - prev === 2) {
-          rangeWithDots.push(prev + 1);
-        } else if (i - prev !== 1) {
-          rangeWithDots.push('...');
-        }
-      }
-      rangeWithDots.push(i);
-      prev = i;
-    }
-
-    return rangeWithDots;
+    return range;
   };
 
   return (
