@@ -100,7 +100,7 @@ export default function Genres() {
             className="heading-primary mb-6 floating-animation"
             style={{ color: "var(--primary-700)" }}
           >
-            📑 Explore Genres
+            📑 Explore Genre's
           </h1>
           <p
             className="text-body-large max-w-3xl mx-auto mb-8"
