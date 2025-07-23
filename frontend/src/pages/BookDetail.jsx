@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import AuthorRecommendations from '../components/AuthorRecommendations';
+
 
 export default function BookDetail() {
   const { id } = useParams();
@@ -315,10 +317,22 @@ export default function BookDetail() {
                   ))}
                 </div>
               </section>
+              
+
             </div>
           </div>
+          <div className={`${cardBaseClasses} border-l-4 m-6`}>
+            <AuthorRecommendations
+            currentBookId={id}
+            author={info.authors?.[0]}
+          />
+          </div>
+          
+
         </div>
       </section>
+      
     </div>
+    
   );
 }
