@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { Home, Search, BookMarked, BookOpen } from 'lucide-react';
 
 export default function Navbar({ isDarkMode, toggleTheme }) {
   const location = useLocation();
@@ -9,7 +10,7 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo">
-          <div className="text-2xl">📚</div>
+          <div className="text-2xl"><BookOpen size={35} className="text-[#0f766e]"/></div>
           <div>
             <h1 className="text-xl font-bold" style={{ color: 'var(--primary-700)' }}>Pouranik</h1>
             <p className="text-xs" style={{ color: 'var(--text-muted)', marginTop: '-2px' }}>Book Discovery</p>
@@ -19,9 +20,9 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
         {/* Navigation Links */}
         <div className="navbar-menu">
           {[
-            { path: '/', label: 'Home', icon: '🏠' },
-            { path: '/explore', label: 'Explore', icon: '🔍' },
-            { path: '/genres', label: 'Genres', icon: '📑' }
+            { path: '/', label: 'Home', icon: <Home size={18} /> },
+            { path: '/explore', label: 'Explore', icon: <Search size={18} /> },
+            { path: '/genres', label: 'Genres', icon: <BookMarked size={18} /> }
           ].map(({ path, label, icon }) => (
             <Link 
               key={path}
