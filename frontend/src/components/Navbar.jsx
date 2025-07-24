@@ -34,11 +34,7 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
           {[
             { path: "/", label: "Home", icon: <Home size={18} /> },
             { path: "/explore", label: "Explore", icon: <Search size={18} /> },
-            {
-              path: "/genres",
-              label: "Genres",
-              icon: <BookMarked size={18} />,
-            },
+            { path: "/genres", label: "Genres", icon: <BookMarked size={18} /> },
           ].map(({ path, label, icon }) => (
             <Link
               key={path}
@@ -56,8 +52,12 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
             className="theme-toggle"
             aria-label="Toggle dark mode"
           >
-            <span className="theme-icon">{isDarkMode ? "☀️" : "🌙"}</span>
-            <span className="theme-label">{isDarkMode ? "Light" : "Dark"}</span>
+            <span className="theme-icon">
+              {isDarkMode ? "☀️" : "🌙"}
+            </span>
+            <span className="theme-label">
+              {isDarkMode ? "Light" : "Dark"}
+            </span>
           </button>
         </div>
       </div>
