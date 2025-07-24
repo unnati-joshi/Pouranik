@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
+import { Home, Search, BookMarked, BookOpen } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({ isDarkMode, toggleTheme }) {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
@@ -9,7 +10,9 @@ export default function Navbar() {
       <div className="navbar-container">
         {/* Logo */}
         <Link to="/" className="navbar-logo">
-          <div className="text-2xl">📚</div>
+          <div className="text-2xl">
+            <BookOpen size={35} className="text-[#0f766e]" />
+          </div>
           <div>
             <h1
               className="text-xl font-bold"
@@ -29,9 +32,13 @@ export default function Navbar() {
         {/* Navigation Links */}
         <div className="navbar-menu">
           {[
-            { path: "/", label: "Home", icon: "🏠" },
-            { path: "/explore", label: "Explore", icon: "🔍" },
-            { path: "/genres", label: "Genres", icon: "📑" },
+            { path: "/", label: "Home", icon: <Home size={18} /> },
+            { path: "/explore", label: "Explore", icon: <Search size={18} /> },
+            {
+              path: "/genres",
+              label: "Genres",
+              icon: <BookMarked size={18} />,
+            },
           ].map(({ path, label, icon }) => (
             <Link
               key={path}
@@ -42,6 +49,16 @@ export default function Navbar() {
               <span>{label}</span>
             </Link>
           ))}
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span className="theme-icon">{isDarkMode ? "☀️" : "🌙"}</span>
+            <span className="theme-label">{isDarkMode ? "Light" : "Dark"}</span>
+          </button>
         </div>
       </div>
     </nav>
