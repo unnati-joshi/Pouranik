@@ -321,12 +321,13 @@ export default function BookDetail() {
 
             </div>
           </div>
-          <div className={`${cardBaseClasses} border-l-4 m-6`}>
+          <div className={cardBaseClasses}>
             <AuthorRecommendations
-            currentBookId={id}
-            author={info.authors?.[0]}
-          />
+              currentBookId={id}
+              author={info.authors}
+            />
           </div>
+          
           
 
         </div>
