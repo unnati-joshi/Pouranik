@@ -90,7 +90,7 @@ export default function BookCard({ book }) {
 
     return (
       <div className="my-1">
-        <span className="text-xs font-medium ">
+        <span className="text-xs font-medium">
           {category}
         </span>
       </div>
@@ -105,9 +105,9 @@ export default function BookCard({ book }) {
       <article className="bg-white rounded-2xl shadow-lg border border-gray-100 group h-full flex flex-col overflow-hidden transition-all duration-500 hover:shadow-xl hover:border-blue-200 transform" data-tour="book-card">
 
         {/* card image */}
-        <div className="relative h-72 flex justify-center  items-center overflow-hidden group bg-gray-200">
+        <div className="relative h-72 flex justify-center  items-center overflow-hidden group bg-gray-200 dark:bg-gray-600">
           {imageUrl ? (
-            <div className="relative border border-gray-200 h-56 w-auto">
+            <div className="relative h-56 w-auto">
               <img
                 src={imageUrl.replace("http:", "https:")}
                 alt={info?.title || "Book Cover"}
@@ -173,7 +173,7 @@ export default function BookCard({ book }) {
 
 
           <div className="mt-auto space-y-3 !pt-4">
-            <div className="flex items-center justify-between space-x-2 text-xs bg-gray-100 rounded-lg !p-3 min-h-[44px]">
+            <div className="flex items-center justify-between space-x-2 text-xs bg-gray-700 dark:bg-gray-100   rounded-lg !p-3 min-h-[44px]">
 
               <div className='flex space-x-2'>
                 <span className="text-gray-600 flex items-center gap-1.5 font-medium">
@@ -199,7 +199,7 @@ export default function BookCard({ book }) {
                   } Ratings
                 </span>
 
-                <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded-md uppercase font-medium">
+                <span className="text-gray-500 px-2 py-1 uppercase font-medium">
                   {info.language || "N/A"}
                 </span>
               </div>
