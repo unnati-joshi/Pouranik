@@ -41,17 +41,7 @@ const buttonStyle = {
   cursor: 'pointer',
   transition: 'background 0.2s',
 };
-const buttonOutlineStyle = {
-  padding: '0.7em 2em',
-  borderRadius: '8px',
-  border: '2px solid var(--primary-700, #0f172a)',
-  fontWeight: 600,
-  fontSize: '1rem',
-  background: '#fff',
-  color: 'var(--primary-700, #0f172a)',
-  cursor: 'pointer',
-  transition: 'background 0.2s',
-};
+
 const buttonDisabledStyle = {
   ...buttonStyle,
   opacity: 0.5,

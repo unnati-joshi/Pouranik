@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AppRoutes from "./routes/AppRoutes";
@@ -26,7 +26,7 @@ function App() {
   };
 
   // --- Custom Tour Guide State ---
-  const tourSteps = [
+   const tourSteps = useMemo(() => [
     {
       selector: "navbar-logo",
       title: "Logo/Home",
@@ -62,7 +62,8 @@ function App() {
       title: "Browse Genres",
       content: "See books by genre.",
     },
-  ];
+  ], []);
+  
   const [tourStep, setTourStep] = useState(0);
   const [tourOpen, setTourOpen] = useState(false);
 
@@ -77,7 +78,7 @@ function App() {
         }
       }, 100); // 100ms delay to ensure DOM is ready
     }
-  }, [tourStep, tourOpen]);
+  }, [tourStep, tourOpen, tourSteps]);
 
   useEffect(() => {
     // Show tour on every refresh
