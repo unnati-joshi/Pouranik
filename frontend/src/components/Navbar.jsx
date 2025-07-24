@@ -32,7 +32,6 @@ export default function Navbar() {
             { path: "/", label: "Home", icon: "🏠" },
             { path: "/explore", label: "Explore", icon: "🔍" },
             { path: "/genres", label: "Genres", icon: "📑" },
-            { path: "/chatbot", label: "Chatbot", icon: "💬" }, // <- Added Chatbot link
           ].map(({ path, label, icon }) => (
             <Link
               key={path}
