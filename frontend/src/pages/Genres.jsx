@@ -114,7 +114,7 @@ export default function Genres() {
           {/* Stats */}
           <div className="glass-effect card-small max-w-2xl mx-auto border-subtle">
             <div className="grid grid-cols-3 gap-6 text-center">
-              <div>
+              <div> 
                 <div
                   className="text-2xl font-bold"
                   style={{ color: "var(--primary-600)" }}
@@ -307,34 +307,35 @@ export default function Genres() {
       <section className="pb-16">
         <div className="container-modern">
           <div className="text-center mb-12">
-            <h3 className="heading-tertiary text-white mb-4">
+            <h3 className="heading-tertiary text-gray-500 font-semibold text-2xl">
               Popular Genre Combinations
             </h3>
-            <p className="text-2xl  text-gray-500 max-w-6xl mx-  mb-8">
-              Try these popular search combinations to discover unique book
-              collections
-            </p>
+            
 
             {/* Book covers grid */}
             <div className=" mx-auto">
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
     {[
-      { title: "1984", img: "https://covers.openlibrary.org/b/id/7222246-L.jpg" },
-      { title: "To Kill a Mockingbird", img: "https://covers.openlibrary.org/b/id/8228691-L.jpg" },
-      { title: "Ikigai", img: "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg" },
-      { title: "Coding", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt7IL9AmRlyZjwbUOLM58hpsoceQ9wNzimXw&s" },
-      { title: "Rich Dad and Poor Dad", img: "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg" },
-      { title: "Wings of Fire", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2D23aQ0_irnxnzoEvvyUAQ8sfNfGViJAQEw&s" },
-      { title: "Brave New World", img: "https://covers.openlibrary.org/b/id/8091011-L.jpg" },
-      { title: "The Great Gatsby", img: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1689690358-screenshot-2023-07-18-at-15-25-38-64b6a0e73c9e9.png?crop=0.9596199524940617xw:1xh;center,top&resize=980:*" }
-    ].map(({ title, img }) => (
-      <div key={title} className="rounded-lg overflow-hidden shadow-lg">
+      { title: "Coding for Beginners", img: "https://m.media-amazon.com/images/I/91Q+9euSjxL._UF1000,1000_QL80_.jpg", link:"https://www.amazon.in/Coding-Beginners-easy-steps-programming-ebook/dp/B00ZG55JH8" },
+      { title: "Intro to Web Dev", img: "https://rukminim2.flixcart.com/image/704/844/jiyvvrk0/book/0/1/2/web-coding-development-all-in-one-for-dummies-original-imaf6nfahngew5de.jpeg?q=90&crop=false",link:"https://www.flipkart.com/web-coding-development-all-in-one-dummies-8-books-one/p/itmf3ghkxtdvtcgu" },
+      { title: "Intro to Python", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBc0DZbn2xL4MEs9Cs_B6TZq_S2LEMRWaxpA&s", link:"https://www.amazon.in/Python-Programming-Beginners-Guide-Sundarrajan/dp/B0D3VHLVVD?ref_=Oct_d_omg_d_14447053031_2" },
+      { title: "Coding", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt7IL9AmRlyZjwbUOLM58hpsoceQ9wNzimXw&s", link:"https://www.amazon.in/Learn-Python-Game-Development-ChatGPT/dp/9355516436?ref_=Oct_d_omg_d_14447053031_4" },
+      { title: "Rich Dad and Poor Dad", img: "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg", link:"https://www.amazon.in/Rich-Dad-Poor-Middle-Anniversary/dp/1612681131/ref=pd_sbs_d_sccl_2_6/257-6343120-0758635?psc=1" },
+      { title: "Think and Grow Rich", img: "https://m.media-amazon.com/images/I/41BooQjbMZL._SY445_SX342_.jpg", link:"https://www.amazon.in/dp/817234564X/ref=sspa_dk_detail_2?psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw" },
+      { title: "The Psychology of Money", img: "https://m.media-amazon.com/images/I/71XEsXS5RlL._SY425_.jpg", link:"https://www.amazon.in/Psychology-Money-Morgan-Housel/dp/9390166268/ref=sr_1_1_sspa?s=books&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" },
+      { title: "Atomic Habits", img: "https://m.media-amazon.com/images/I/419aJfhczCL._SY445_SX342_.jpg", link:"https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834/ref=pd_sbs_d_sccl_2_2/257-6343120-0758635?psc=1" }
+    ].map(({ title, img,link }) => (
+      <div key={title} className="rounded-lg overflow-hidden grid justify-center items-center shadow-lg">
+        <a href={link} target="blank">
+
         <img
           src={img} 
           alt={title} 
           title={title}
           className="w-[250px] hover:w-[270px] cursor-pointer transition-all delay-100 h-[300px] object-cover"
-        />
+          />
+          </a>
+          <p className="font-semibold text-xl text-zinc-800">{title}</p>
       </div>
     ))}
   </div>
