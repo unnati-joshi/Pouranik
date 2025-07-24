@@ -1,92 +1,149 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import Modal from 'react-modal';
+import { jwtDecode } from "jwt-decode"
 
 Modal.setAppElement('#root');
 
-const AddBookModal = () => {
+const LibBookModal = ({ isOpen, onClose, book }) => {
+  const [bookmark, setBookmark] = useState('');
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const token = localStorage.getItem("token");
+  const decodedToken = jwtDecode(token);
+  console.log(decodedToken);
+
+  const handleUpdateDetails = async() => {
+    const updatedDetails = {
+      titleByYou: title,
+      notes_bookmarks: bookmark,
+      category: category,
+    }
+    const res = await fetch(`http://localhost:5000/api/v1/lib/${decodedToken.id}/book/${book._id}/update`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedDetails),
+    });
+    const data = await res.json();
+    alert(data.message);
+    onClose()
+  }
+
+  const handleRemoveBook = async() => {
+    const res = await fetch(`http://localhost:5000/api/v1/lib/${decodedToken.id}/book/${book._id}/delete`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    })
+    const data = await res.json();
+    alert(data.message);
+    onClose()
   }
   
+  console.log(book);
+
   return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      contentLabel="Post Your Doubt"
+      contentLabel="Add this book to Library"
       style={{
         overlay: {
           backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          zIndex: 9999,
         },
         content: {
           position: 'fixed',
           top: '50%',
           left: '50%',
+          zIndex: 10000,
           transform: 'translate(-50%, -50%)',
           width: '90%',
-          maxWidth: '500px',
+          maxWidth: '550px',
+          height: '50%',
+          maxHeight: '650px',
           padding: '20px',
           borderRadius: '10px',
           boxShadow: '0px 4px 8px rgba(0,0,0,0.2)',
         },
       }}
     >
-      <h2 className="text-lg font-bold mb-4">Post Your Doubt</h2>
-      <form onSubmit={handleSubmit}> 
-        {/* Input field for doubt title */}
+      <div className="flex flex-col justify-between items-center h-full w-full">
+        <div className="flex justify-between items-center w-full">
+          <div>
+          <img
+        src={book.cover || "/placeholder.png"}
+        alt="Book Cover"
+        className="w-full h-full object-cover rounded-md"
+      />
+      <Link
+        to={`/Book/${book.google_book_id}`}
+        className='inline-flex items-center !px-4 !py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 no-underline'
+      >
+        To the Book -&gt;
+      </Link>
+        </div>
+              <form className="flex flex-col gap-4 w-[60%]"> 
+        {/* Input field for petname for book if any in mind */}
         <input 
         type="text" 
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder='Type your doubt title here...'
+        placeholder={book.titleByYou}
         className="w-full p-2 border rounded mb-4"
         />
-        {/* Textarea for doubt description */}
+        {/* Textarea for book description or bookmarks */}
         <textarea
-          value={doubt}
-          onChange={(e) => setDoubt(e.target.value)}
-          placeholder="Type your doubt description here..."
+          value={bookmark}
+          onChange={(e) => setBookmark(e.target.value)}
+          placeholder={book.notes_bookmarks}
           className="w-full p-2 border rounded mb-4"
           rows="5"
         ></textarea>
 
-        {/* File Upload Section */}
-        <div className="flex items-center gap-4 mb-4">
-          <input
-            type="file"
-            ref={inputFile}
-            style={{ display: 'none' }}
-            onChange={handleFileUpload}
-            accept="image/*"
-          />
-          <button
-            type="button"
-            onClick={openFileDialog}
-            className="flex items-center px-4 py-2 bg-gray-200 rounded shadow-sm hover:bg-gray-300"
-          >
-            <MdCloudUpload className="mr-2 h-5 w-5 text-gray-600" />
-            {file ? file.name : 'Upload Image'}
-          </button>
+        {/* Category Selection */}
+        <select name="Category" id="" className="rounded-2xl outline-2 !p-2" value={category} onChange={(e) => setCategory(e.target.value)}>
+          <option value="">Select a Category</option>
+          <option value="currently-reading">Currently Reading</option>
+          <option value="next-up">Next Up</option>
+          <option value="finished">Finished</option>
+        </select>
+        </form>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-between items-center w-full">
+          <div className="flex justify-end gap-2">
           <button
             type="button"
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+            onClick={handleUpdateDetails}
+            className="px-4 py-2 !bg-blue-500 text-white rounded hover:!bg-blue-600"
           >
-            Cancel
+            Update Details
           </button>
           <button
-            type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={handleRemoveBook}
+            className="px-4 py-2 !bg-blue-500 text-white rounded hover:!bg-blue-600"
           >
-            Post
+            Remove from Library
           </button>
         </div>
-      </form>
+        <button
+          onClick={onClose}
+          className="px-4 py-2 !bg-white rounded hover:!bg-red-600 hover:text-white !cursor-pointer"
+        >
+          Close
+        </button>
+        </div>
+      
+      </div>
     </Modal>
   )
 }
 
-export default AddBookModal
+export default LibBookModal

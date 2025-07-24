@@ -333,7 +333,7 @@ export default function BookDetail() {
         </div>
       </section>
 
-      <AddBookModal isOpen={isModalOpen} onClose={closeModal} />
+      <AddBookModal isOpen={isModalOpen} onClose={closeModal} bookInfo={info} book={book} />
     </div>
   );
 }

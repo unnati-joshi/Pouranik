@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import AppRoutes from "./routes/AppRoutes";
 import ScrollToTopButton from "./components/_global/ScrollToTop";
 import "./App.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -34,6 +36,7 @@ function App() {
       </main>
       <Footer />
       <ScrollToTopButton />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

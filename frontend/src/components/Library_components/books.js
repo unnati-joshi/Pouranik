@@ -1,17 +1,51 @@
-export const currentlyReading = [
-  { cover: "https://example.com/book1.jpg" },
-  { cover: "https://example.com/book2.jpg" },
-  { cover: "https://example.com/book3.jpg" },
-];
+import { useEffect, useState } from "react";
 
-export const nextUp = [
-  { cover: "https://example.com/book4.jpg" },
-  { cover: "https://example.com/book5.jpg" },
-  { cover: "https://example.com/book6.jpg" },
-];
+const useLibraryBooks = (trigger) => {
+  const [currentlyReading, setCurrentlyReading] = useState([]);
+  const [nextUp, setNextUp] = useState([]);
+  const [finished, setFinished] = useState([]);
 
-export const finished = [
-  { cover: "https://example.com/book7.jpg" },
-  { cover: "https://example.com/book8.jpg" },
-  { cover: "https://example.com/book9.jpg" },
-];
+  useEffect(() => {
+    const fetchLibrary = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+
+      try {
+        const res = await fetch("http://localhost:5000/api/v1/library", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+        console.log(data.books);
+
+        // Categorize books based on `category`
+        const current = [];
+        const upcoming = [];
+        const done = [];
+
+        data.books.forEach((book) => {
+          if (book.category === "currently-reading") current.push(book);
+          else if (book.category === "next-up") upcoming.push(book);
+          else if (book.category === "finished") done.push(book);
+        });
+
+        console.log(current, upcoming, done);
+
+        setCurrentlyReading(current);
+        setNextUp(upcoming);
+        setFinished(done);
+      } catch (error) {
+        console.error("Error fetching books:", error.message);
+      }
+    };
+
+    fetchLibrary();
+  }, [trigger]);
+
+  return { currentlyReading, nextUp, finished };
+};
+
+export default useLibraryBooks;

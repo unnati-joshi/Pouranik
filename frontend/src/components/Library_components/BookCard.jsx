@@ -1,12 +1,30 @@
-const BookCard = ({ cover }) => {
+import { useState } from "react";
+import LibBookModal from "./LibBookModal";
+
+const BookCard = ({ book }) => {
+  const [isLibBookModalOpen, setIsLibBookModalOpen] = useState(false);
+  const openLibModal = () => setIsLibBookModalOpen(true);
+  // const closeLibModal = () => setIsLibBookModalOpen(false);
+  const closeLibModal = (e) =>  {
+    console.log("Closing the modal");
+    setIsLibBookModalOpen(false);
+  }
+
   return (
-    <div className="w-24 md:w-28 lg:w-32 transform hover:scale-105 transition min-w-36">
+    <div onClick={openLibModal} 
+      className="group relative w-28 h-40 rounded-md bg-white overflow-hidden shadow-2xl transform transition-all duration-300 min-w-[100px]
+             hover:scale-105 hover:rotate-[-1deg] hover:shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
+    >
       <img
-        src={cover}
+        src={book.cover || "/placeholder.png"}
         alt="Book Cover"
-        className="rounded shadow-[inset_-4px_0px_6px_rgba(0,0,0,0.1),4px_4px_12px_rgba(0,0,0,0.2)]"
+        className="w-full h-full object-cover rounded-md"
       />
+      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition duration-300 rounded-md" />
+
+      <LibBookModal isOpen={isLibBookModalOpen} onClose={closeLibModal} book={book} />
     </div>
+
   );
 };
 

@@ -1,6 +1,25 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function Home() {
+  useEffect(() => {
+  if (sessionStorage.getItem("showLoginToast") === "true") {
+    toast.success("Logged in successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showLoginToast");
+  }
+
+  if (sessionStorage.getItem("showSignupToast") === "true") {
+    toast.success("Signed up successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showSignupToast");
+  }
+
+  if (sessionStorage.getItem("showLogoutToast") === "true") {
+    toast.success("Logged out successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showLogoutToast");
+  }
+}, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}

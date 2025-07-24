@@ -11,6 +11,14 @@ const bookSchema = new mongoose.Schema(
         category: {
             type: String,
             required: true,
+        }, 
+        cover: {
+            type: String,
+            required: true,
+        },
+        google_book_id: {
+            type: String,
+            required: true,
         }
     }, {
         timestamps: true,  //createdAt updatedAt
@@ -23,6 +31,14 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+        },
+        name: {
+            type: String,
+            required: true,
+        },
+        password: {
+            type: String,
+            required: true,
         },
         books: [bookSchema],
     }, {

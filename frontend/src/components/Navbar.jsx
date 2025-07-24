@@ -1,9 +1,26 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Search, BookMarked, BookOpen } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { IoLibraryOutline } from "react-icons/io5";
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar({ isDarkMode, toggleTheme }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); //true if token exists
+  }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    sessionStorage.setItem("showLogoutToast", "true");
+    navigate('/');
+  }
 
   return (
     <nav className="navbar-modern">
@@ -18,11 +35,48 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
         </Link>
         
         {/* Navigation Links */}
-        <div className="navbar-menu">
+        {isLoggedIn ? (
+          <div className="navbar-menu">
           {[
             { path: '/', label: 'Home', icon: <Home size={18} /> },
             { path: '/explore', label: 'Explore', icon: <Search size={18} /> },
-            { path: '/genres', label: 'Genres', icon: <BookMarked size={18} /> }
+            { path: '/genres', label: 'Genres', icon: <BookMarked size={18} /> },
+            { path: '/library', label: 'Your Library', icon: <IoLibraryOutline size={18} />}
+          ].map(({ path, label, icon }) => (
+            <Link 
+              key={path}
+              to={path} 
+              className={`navbar-link ${isActive(path) ? 'active' : ''}`}
+            >
+              <span className="text-base">{icon}</span>
+              <span>{label}</span>
+            </Link>
+          ))}
+          {/* Logout */}
+          <button onClick={handleLogout} className='theme-toggle'>
+            Logout 
+          </button>
+          {/* Dark Mode Toggle */}
+          <button 
+            onClick={toggleTheme}
+            className="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span className="theme-icon">
+              {isDarkMode ? '☀️' : '🌙'}
+            </span>
+            <span className="theme-label">
+              {isDarkMode ? 'Light' : 'Dark'}
+            </span>
+          </button>
+        </div>
+        ) : (
+          <div className="navbar-menu">
+          {[
+            { path: '/', label: 'Home', icon: <Home size={18} /> },
+            { path: '/explore', label: 'Explore', icon: <Search size={18} /> },
+            { path: '/genres', label: 'Genres', icon: <BookMarked size={18} /> },
+            { path: '/signup', label: 'Get Started'}
           ].map(({ path, label, icon }) => (
             <Link 
               key={path}
@@ -48,6 +102,7 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
             </span>
           </button>
         </div>
+        )}
       </div>
     </nav>
   );

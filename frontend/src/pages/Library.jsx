@@ -1,12 +1,28 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 import { IoLibraryOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import ShelfSection from '../components/Library_components/ShelfSection';
-import { currentlyReading, nextUp, finished } from '../components/Library_components/books';
+import useLibraryBooks from "../components/Library_components/books";
 
 const Library = () => {
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [reloadTrigger, setReloadTrigger] = useState(false);
+    
+    //for library book data to be refetched for different users as they sign in i.e. as token gets changed, its like refreshing
+    useEffect(() => {
+        const handleStorage = () => {
+            setToken(localStorage.getItem("token"));
+            setReloadTrigger(prev => !prev);
+        };
+
+        window.addEventListener("storage", handleStorage);
+        return () => window.removeEventListener("storage", handleStorage);
+    }, [])
+
+    const { currentlyReading, nextUp, finished } = useLibraryBooks(reloadTrigger);
+    
     return (
-        <div className='flex flex-col justify-center items-center h-[750px] gap-7 !m-7'>
+        <div className='flex flex-col justify-center items-center !m-7'>
             <section className='w-[80%] space-y-2 mt-7'>
                 <h1 className="mb-6 font-bold floating-animation flex gap-3.5 justify-center items-center"
                     style={{ color: "var(--primary-700)" }}>
@@ -30,7 +46,7 @@ const Library = () => {
                     <input type="text" />
                   </div>
                 </div>
-                <section className='w-[94%] h-[500px] flex flex-col justify-center items-center'>
+                <section className='w-[94%] h-[800px] flex flex-col justify-center items-center'>
                 <ShelfSection title="Currently reading" books={currentlyReading} />
                 <ShelfSection title="Next up" books={nextUp} />
                 <ShelfSection title="Finished" books={finished} />
