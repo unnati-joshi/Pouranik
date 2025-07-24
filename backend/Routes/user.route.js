@@ -4,7 +4,7 @@ import authenticateToken from "../Middlewares/auth.js";
 
 const router = express.Router();
 
-router.post("/signup", authenticateToken, signUp);
-router.post("/login", authenticateToken, logIn);
+router.post("/signup", signUp);
+router.post("/login", logIn);
 
 export default router;

@@ -20,6 +20,11 @@ const Library = () => {
     }, [])
 
     const { currentlyReading, nextUp, finished } = useLibraryBooks(reloadTrigger);
+
+    const onBookChange = () => {
+  setReloadTrigger(prev => !prev); // toggles to trigger useEffect
+};
+
     
     return (
         <div className='flex flex-col justify-center items-center !m-7'>
@@ -46,10 +51,10 @@ const Library = () => {
                     <input type="text" />
                   </div>
                 </div>
-                <section className='w-[94%] h-[800px] flex flex-col justify-center items-center'>
-                <ShelfSection title="Currently reading" books={currentlyReading} />
-                <ShelfSection title="Next up" books={nextUp} />
-                <ShelfSection title="Finished" books={finished} />
+                <section className='w-[94%] h-[800px] grid grid-cols-1 grid-rows-3 gap-4'>
+                <ShelfSection title="Currently reading" books={currentlyReading} onBookChange={onBookChange} />
+                <ShelfSection title="Next up" books={nextUp} onBookChange={onBookChange} />
+                <ShelfSection title="Finished" books={finished} onBookChange={onBookChange} />
             </section>
             </section>
         </div>

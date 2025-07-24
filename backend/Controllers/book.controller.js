@@ -6,7 +6,7 @@ export const addBook = async(req, res) => {
       if(!category || !book_info || !google_book_id){
           return res.status(400).json({ success: false, message: "category field is necessary!"});
       }
-      console.log(google_book_id);
+      
       try{
           const user = await User.findById(req.user.id);
           if(!user) return res.status(404).json({ error: "User not found" });

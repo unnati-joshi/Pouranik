@@ -1,9 +1,15 @@
 import User from "../Models/user.model.js";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const signUp = async(req, res) => {
     const { email, password, FullName } = req.body;
-  console.log(req.body);
 
   try {
     const existingUser = await User.findOne({ email_id: email });
@@ -25,7 +31,6 @@ export const signUp = async(req, res) => {
 
 export const logIn = async(req, res) => {
     const { email, password } = req.body;
-  console.log(req.body);
 
   try {
     const user = await User.findOne({ email_id: email });

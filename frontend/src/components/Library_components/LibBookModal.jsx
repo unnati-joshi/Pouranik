@@ -2,17 +2,17 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Modal from 'react-modal';
 import { jwtDecode } from "jwt-decode"
+import { toast } from "react-toastify";
 
 Modal.setAppElement('#root');
 
-const LibBookModal = ({ isOpen, onClose, book }) => {
+const LibBookModal = ({ isOpen, onClose, book, onBookChange }) => {
   const [bookmark, setBookmark] = useState('');
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
 
   const token = localStorage.getItem("token");
   const decodedToken = jwtDecode(token);
-  console.log(decodedToken);
 
   const handleUpdateDetails = async() => {
     const updatedDetails = {
@@ -29,7 +29,8 @@ const LibBookModal = ({ isOpen, onClose, book }) => {
       body: JSON.stringify(updatedDetails),
     });
     const data = await res.json();
-    alert(data.message);
+    onBookChange();
+    toast.success(data.message);
     onClose()
   }
 
@@ -41,7 +42,8 @@ const LibBookModal = ({ isOpen, onClose, book }) => {
       },
     })
     const data = await res.json();
-    alert(data.message);
+    onBookChange();
+    toast.success(data.message);
     onClose()
   }
   
@@ -74,12 +76,12 @@ const LibBookModal = ({ isOpen, onClose, book }) => {
       }}
     >
       <div className="flex flex-col justify-between items-center h-full w-full">
-        <div className="flex justify-between items-center w-full">
-          <div>
+        <div className="flex items-center gap-4 w-full">
+          <div className="flex flex-col gap-2 w-1/2">
           <img
         src={book.cover || "/placeholder.png"}
         alt="Book Cover"
-        className="w-full h-full object-cover rounded-md"
+        className="w-full object-cover rounded-md"
       />
       <Link
         to={`/Book/${book.google_book_id}`}
@@ -88,7 +90,7 @@ const LibBookModal = ({ isOpen, onClose, book }) => {
         To the Book -&gt;
       </Link>
         </div>
-              <form className="flex flex-col gap-4 w-[60%]"> 
+              <form className="flex flex-col gap-4 w-full"> 
         {/* Input field for petname for book if any in mind */}
         <input 
         type="text" 
@@ -107,7 +109,7 @@ const LibBookModal = ({ isOpen, onClose, book }) => {
         ></textarea>
 
         {/* Category Selection */}
-        <select name="Category" id="" className="rounded-2xl outline-2 !p-2" value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select name="Category" id="" className="rounded-2xl outline-2 !p-2 w-full" value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Select a Category</option>
           <option value="currently-reading">Currently Reading</option>
           <option value="next-up">Next Up</option>

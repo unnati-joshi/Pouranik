@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LibBookModal from "./LibBookModal";
 
-const BookCard = ({ book }) => {
+const BookCard = ({ book, onBookChange }) => {
   const [isLibBookModalOpen, setIsLibBookModalOpen] = useState(false);
   const openLibModal = () => setIsLibBookModalOpen(true);
   // const closeLibModal = () => setIsLibBookModalOpen(false);
@@ -22,7 +22,7 @@ const BookCard = ({ book }) => {
       />
       <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition duration-300 rounded-md" />
 
-      <LibBookModal isOpen={isLibBookModalOpen} onClose={closeLibModal} book={book} />
+      <LibBookModal isOpen={isLibBookModalOpen} onClose={closeLibModal} book={book} onBookChange={onBookChange} />
     </div>
 
   );

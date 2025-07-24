@@ -6,7 +6,6 @@ import mainRouter from "./Routes/index.js";
 
 const app = express();
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET;
 app.use(express.json());
 app.use(cors());
 
