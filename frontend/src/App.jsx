@@ -29,58 +29,38 @@ function App() {
   const tourSteps = [
     {
       selector: "navbar-logo",
-      title: "Welcome to Pouranik!",
-      content: "This is the logo and home link. Click here anytime to return to the homepage.",
+      title: "Logo/Home",
+      content: "Click to return home anytime.",
     },
     {
       selector: "navbar-link-home",
-      title: "Home Navigation",
-      content: "Use this link to go to the home page.",
+      title: "Home Tab",
+      content: "Go to the homepage.",
     },
     {
       selector: "navbar-link-explore",
-      title: "Explore Books",
-      content: "Browse and discover new books here!",
+      title: "Explore Tab",
+      content: "Browse all books.",
     },
     {
       selector: "navbar-link-genres",
-      title: "Genres",
-      content: "Find books by your favorite genres.",
+      title: "Genres Tab",
+      content: "Browse by genre.",
     },
     {
       selector: "navbar-theme-toggle",
       title: "Theme Toggle",
-      content: "Switch between light and dark mode.",
+      content: "Switch light/dark mode.",
     },
     {
       selector: "start-exploring-section",
       title: "Start Exploring",
-      content: "Begin your journey by exploring our curated book selections.",
+      content: "Start your book journey.",
     },
     {
       selector: "browse-genre-section",
-      title: "Browse Genre",
-      content: "Browse books by your favorite genres for a personalized experience.",
-    },
-    {
-      selector: "why-choose-pouranik-section",
-      title: "Why Choose Pouranik?",
-      content: "Discover what makes Pouranik unique for book lovers.",
-    },
-    {
-      selector: "powered-by-google-books-section",
-      title: "Powered by Google Books",
-      content: "Our data is powered by Google Books for comprehensive results.",
-    },
-    {
-      selector: "find-next-books-section",
-      title: "Find Your Next Books",
-      content: "Use our features to find your next great read!",
-    },
-    {
-      selector: "footer-section",
-      title: "Footer",
-      content: "Find links, credits, and more information in the footer.",
+      title: "Browse Genres",
+      content: "See books by genre.",
     },
   ];
   const [tourStep, setTourStep] = useState(0);

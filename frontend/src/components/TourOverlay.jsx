@@ -14,17 +14,17 @@ const overlayStyle = {
 
 const tooltipStyle = {
   position: 'absolute',
-  background: 'rgba(30,41,59,0.7)', // semi-transparent dark background
+  background: 'var(--primary-50, #f0f9ff)', // fallback to light blue
   borderRadius: '12px',
-  boxShadow: '0 4px 32px 0 rgba(0,0,0,0.25)',
+  boxShadow: '0 4px 32px 0 rgba(0,0,0,0.18)',
   padding: '1.5rem',
   minWidth: '280px',
   maxWidth: '340px',
   minHeight: '120px',
   zIndex: 10000,
-  color: '#fff', // white text for contrast
+  color: 'var(--primary-700, #0f172a)', // fallback to Pouranik's dark blue
   fontSize: '1.08rem',
-  border: '2px solid #0ea5e9',
+  border: '2px solid var(--primary-700, #0f172a)',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -32,12 +32,23 @@ const tooltipStyle = {
 
 const buttonStyle = {
   padding: '0.7em 2em',
-  borderRadius: '8px',
-  border: 'none',
+  borderRadius: 6,
+  border: '2px solid var(--primary-700, #0f172a)',
   fontWeight: 600,
   fontSize: '1rem',
-  background: '#222',
-  color: '#fff',
+  background: 'var(--primary-50, #f0f9ff)',
+  color: 'var(--primary-700, #0f172a)',
+  cursor: 'pointer',
+  transition: 'background 0.2s',
+};
+const buttonOutlineStyle = {
+  padding: '0.7em 2em',
+  borderRadius: '8px',
+  border: '2px solid var(--primary-700, #0f172a)',
+  fontWeight: 600,
+  fontSize: '1rem',
+  background: '#fff',
+  color: 'var(--primary-700, #0f172a)',
   cursor: 'pointer',
   transition: 'background 0.2s',
 };
@@ -74,6 +85,7 @@ export default function TourOverlay({ step, totalSteps, onNext, onPrev, onClose,
 
   if (!visible) return null;
 
+  // Always render the overlay, even if rect is null
   // Highlight box
   const rect = getTargetRect(step.selector);
   let highlight = {};
@@ -95,9 +107,9 @@ export default function TourOverlay({ step, totalSteps, onNext, onPrev, onClose,
         left: rect.left - 10,
         width: rect.width + 20,
         height: rect.height + 20,
-        border: '4px solid #38bdf8',
+        border: '4px solid var(--primary-700, #0f172a)',
         borderRadius: '16px',
-        boxShadow: '0 0 32px 12px #38bdf8, 0 0 0 9999px rgba(0,0,0,0.3)',
+        boxShadow: '0 0 32px 12px var(--primary-700, #0f172a), 0 0 0 9999px rgba(0,0,0,0.3)',
         pointerEvents: 'none',
         zIndex: 10001,
         transition: 'all 0.2s',
@@ -128,8 +140,8 @@ export default function TourOverlay({ step, totalSteps, onNext, onPrev, onClose,
       >
         {rect ? (
           <>
-            <div style={{ fontWeight: 700, marginBottom: 10, fontSize: '1.15rem', color: '#38bdf8' }}>{step.title}</div>
-            <div style={{ marginBottom: 18, color: '#fff', lineHeight: 1.5 }}>{step.content}</div>
+            <div style={{ fontWeight: 700, marginBottom: 10, fontSize: '1.15rem', color: 'var(--primary-700, #0f172a)' }}>{step.title}</div>
+            <div style={{ marginBottom: 18, color: 'var(--primary-700, #0f172a)', lineHeight: 1.5 }}>{step.content}</div>
           </>
         ) : (
           <div style={{ color: '#f87171', fontWeight: 600, textAlign: 'center', margin: '20px 0' }}>
@@ -138,15 +150,14 @@ export default function TourOverlay({ step, totalSteps, onNext, onPrev, onClose,
         )}
         <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, marginTop: 10 }}>
           <button onClick={onPrev} disabled={step.index === 0} style={step.index === 0 ? buttonDisabledStyle : buttonStyle}>Prev</button>
-          <span style={{ fontSize: 14, color: '#888', alignSelf: 'center' }}>{step.index + 1} / {totalSteps}</span>
+          <span style={{ fontSize: 14, color: 'var(--primary-700, #0f172a)', alignSelf: 'center' }}>{step.index + 1} / {totalSteps}</span>
           {step.index === totalSteps - 1 ? (
             <button onClick={onClose} style={buttonStyle}>Finish</button>
           ) : (
             <button onClick={onNext} style={buttonStyle}>Next</button>
           )}
         </div>
-        <button onClick={onClose} style={{ position: 'absolute', top: 8, right: 12, background: 'none', border: 'none', fontSize: 22, color: '#888', cursor: 'pointer', fontWeight: 700 }} aria-label="Close tour">×</button>
-        <button onClick={onClose} style={{ position: 'absolute', top: 8, right: 48, background: 'rgba(30,41,59,0.7)', border: '2px solid #0ea5e9', borderRadius: 6, color: '#38bdf8', fontWeight: 600, fontSize: 15, padding: '2px 16px', cursor: 'pointer' }}>Skip</button>
+        <button onClick={onClose} style={{ position: 'absolute', top: 8, right: 48, background: 'var(--primary-50, #f0f9ff)', border: '2px solid var(--primary-700, #0f172a)', borderRadius: 6, color: 'var(--primary-700, #0f172a)', fontWeight: 600, fontSize: 15, padding: '2px 16px', cursor: 'pointer' }}>Skip</button>
       </div>
     </div>
   );
