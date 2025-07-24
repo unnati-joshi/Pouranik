@@ -67,6 +67,7 @@ export default function Home() {
             <Link
               to="/explore"
               className="button-primary inline-flex items-center gap-3 no-underline px-8 py-4 text-lg min-w-[220px] justify-center"
+              data-tour="start-exploring-section"
             >
               <span className="text-xl">🚀</span>
               <span>Start Exploring</span>
@@ -74,6 +75,7 @@ export default function Home() {
             <Link
               to="/genres"
               className="button-secondary inline-flex items-center gap-3 no-underline text-lg min-w-[220px] justify-center"
+              data-tour="browse-genre-section"
             >
               <span className="text-xl">📚</span>
               <span>Browse Genres</span>
@@ -102,7 +104,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
-            <div className="card-modern text-center book-card-hover fade-in">
+            <div className="card-modern text-center book-card-hover fade-in" data-tour="why-choose-pouranik-section">
               <div className="text-6xl mb-6">🔍</div>
               <h3
                 className="text-2xl font-semibold mb-4"
@@ -160,7 +162,7 @@ export default function Home() {
       {/* Stats Section */}
       <section className="section-padding-sm">
         <div className="container-md">
-          <div className="card-modern text-center">
+          <div className="card-modern text-center" data-tour="powered-by-google-books-section">
             <h3
               className="text-2xl font-semibold mb-8"
               style={{ color: "var(--primary-700)" }}
@@ -243,6 +245,7 @@ export default function Home() {
             <Link
               to="/explore"
               className="button-primary inline-flex items-center gap-3 no-underline px-10 py-5 text-xl"
+              data-tour="find-next-books-section"
             >
               <span className="text-2xl">🎯</span>
               <span>Find Your Next Book</span>
