@@ -114,7 +114,7 @@ export default function Genres() {
           {/* Stats */}
           <div className="glass-effect card-small max-w-2xl mx-auto border-subtle">
             <div className="grid grid-cols-3 gap-6 text-center">
-              <div> 
+              <div>
                 <div
                   className="text-2xl font-bold"
                   style={{ color: "var(--primary-600)" }}
@@ -310,37 +310,76 @@ export default function Genres() {
             <h3 className="heading-tertiary text-gray-500 font-semibold text-2xl">
               Popular Genre Combinations
             </h3>
-            
 
             {/* Book covers grid */}
             <div className=" mx-auto">
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
-    {[
-      { title: "Coding for Beginners", img: "https://m.media-amazon.com/images/I/91Q+9euSjxL._UF1000,1000_QL80_.jpg", link:"https://www.amazon.in/Coding-Beginners-easy-steps-programming-ebook/dp/B00ZG55JH8" },
-      { title: "Intro to Web Dev", img: "https://rukminim2.flixcart.com/image/704/844/jiyvvrk0/book/0/1/2/web-coding-development-all-in-one-for-dummies-original-imaf6nfahngew5de.jpeg?q=90&crop=false",link:"https://www.flipkart.com/web-coding-development-all-in-one-dummies-8-books-one/p/itmf3ghkxtdvtcgu" },
-      { title: "Intro to Python", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBc0DZbn2xL4MEs9Cs_B6TZq_S2LEMRWaxpA&s", link:"https://www.amazon.in/Python-Programming-Beginners-Guide-Sundarrajan/dp/B0D3VHLVVD?ref_=Oct_d_omg_d_14447053031_2" },
-      { title: "Coding", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt7IL9AmRlyZjwbUOLM58hpsoceQ9wNzimXw&s", link:"https://www.amazon.in/Learn-Python-Game-Development-ChatGPT/dp/9355516436?ref_=Oct_d_omg_d_14447053031_4" },
-      { title: "Rich Dad and Poor Dad", img: "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg", link:"https://www.amazon.in/Rich-Dad-Poor-Middle-Anniversary/dp/1612681131/ref=pd_sbs_d_sccl_2_6/257-6343120-0758635?psc=1" },
-      { title: "Think and Grow Rich", img: "https://m.media-amazon.com/images/I/41BooQjbMZL._SY445_SX342_.jpg", link:"https://www.amazon.in/dp/817234564X/ref=sspa_dk_detail_2?psc=1&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw" },
-      { title: "The Psychology of Money", img: "https://m.media-amazon.com/images/I/71XEsXS5RlL._SY425_.jpg", link:"https://www.amazon.in/Psychology-Money-Morgan-Housel/dp/9390166268/ref=sr_1_1_sspa?s=books&sr=1-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1" },
-      { title: "Atomic Habits", img: "https://m.media-amazon.com/images/I/419aJfhczCL._SY445_SX342_.jpg", link:"https://www.amazon.in/Atomic-Habits-James-Clear/dp/1847941834/ref=pd_sbs_d_sccl_2_2/257-6343120-0758635?psc=1" }
-    ].map(({ title, img,link }) => (
-      <div key={title} className="rounded-lg overflow-hidden grid justify-center items-center shadow-lg">
-        <a href={link} target="blank">
-
-        <img
-          src={img} 
-          alt={title} 
-          title={title}
-          className="w-[250px] hover:w-[270px] cursor-pointer transition-all delay-100 h-[300px] object-cover"
-          />
-          </a>
-          <p className="font-semibold text-xl text-zinc-800">{title}</p>
-      </div>
-    ))}
-  </div>
-</div>
-
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+                {[
+                  {
+                    title: "White Tiger on Snow Mountain",
+                    img: "https://books.google.com/books/publisher/content?id=O4maBAAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE73X8x7P9csSEKrnxCYccejkeOVdumam8IOWWvCkr-37uFNKiXXuPBHvDoV5i4IpQXlTkQ0PMchbK_1apMhyHro93xA6tVYPw5eX_bJLfI5OX3dFZHUSFGVsNZL7nGyEdKvw5Don&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/O4maBAAAQBAJ",
+                    type: "fiction",
+                  },
+                  {
+                    title: "Dune Part 2",
+                    img: "https://books.google.com/books/content?id=p1MULH7JsTQC&printsec=frontcover&img=1&zoom=4&edge=curl&imgtk=AFLRE726kVz-gsG4mTRpCtPDyhdrtbbkrAUapGER3u7grmN4r_e-6jWvb4u7CLyadTJMndMXNIuIRMVn9mLs8XmRqUpjG2WLCQTWvg8QAwoBPBdIwSl1JcLgWLIuiy3rZVD3QNbtMUOW&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/p1MULH7JsTQC",
+                    type: "science-fiction",
+                  },
+                  {
+                    title: "That Night",
+                    img: "https://books.google.com/books/publisher/content?id=TnEhEAAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE72zCBDWWniEkK2sMD2XSlIA4xK6-mfechbz4p4nuRVDjoB5IEJ8iGrOONnWmnT4_HegbOkfOoMnGjyeOpWQyupers9nZ0m1qia6z8tWASTv0ki1O_5yQVTmemZ4h4VFFnebOUN4&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/TnEhEAAAQBAJ",
+                    type: "mystery",
+                  },
+                  {
+                    title: "The Portfolio Book",
+                    img: "https://books.google.com/books/publisher/content?id=Uf2dCAAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE72g951bgF_HbFtSFNAvLOZIdH82bmPIsDeS_k9VNsxtci-yNM9GCtL0LarbcbyXVR0Xky8-4xeKIzt3eMDn-wDErGLzoZKUJg0RvNLkOtBbsqW7SGLNMy0ZdjywnelkaQPAAFQI&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/Uf2dCAAAQBAJ",
+                    type: "self help",
+                  },
+                  {
+                    title: "Bill Gates",
+                    img: "https://books.google.com/books/publisher/content?id=zQbJEAAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE70hMOoQ9xNafsIqZvyqbv-Bst2LXMZX3fb3YOaXCSrNmfK-e-DQl5rO3uAHRmQxvAVUNN5KHBO_m5ecnTOrk0meGmqV9mrazdMUe2hQuIulKsTUA_aQF4sZge0jwrUnmvV2_rgm&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/zQbJEAAAQBAJ",
+                    type: "biography",
+                  },
+                  {
+                    title: "The Self Help Addict",
+                    img: "https://books.google.com/books/publisher/content?id=iWpRDwAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE70v8gRsM0e_gI7ptBDmJyy2A2F61QSE-WDQdeg_99c8Nq88cU8kroF5GwAn2THhG-yIedCDVAP_yFIOrjXe-zHTrVRYYKQhNjKJZO3d2d1qzFBg6xnwE014I1GinzDLseVlJKkQ&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/iWpRDwAAQBAJ",
+                    type: "self help",
+                  },
+                  {
+                    title: "The Fantastic Beasts",
+                    img: "https://books.google.com/books/publisher/content?id=EcekAwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE716foaPXP6TfeVvRpMboOOo7Lfn99lv4W6jiVMNYSBo0ROe7qLDbZzoCHyi5aaTCCjruRDzOWGgL9BpEiLYarkBcUq8UUv8_A2A7fkQka3uWGJEx8qyPysP50KWQqh_VJY_AyXE&source=gbs_api",
+                    link: "https://pouranik.vercel.app/book/EcekAwAAQBAJ",
+                    type: "Harry Potter",
+                  },
+                ].map(({ title, img, link, type }) => (
+                  <div
+                    key={title}
+                    className="rounded-lg overflow-hidden grid justify-center items-center shadow-lg"
+                  >
+                    <a href={link} target="blank">
+                      <img
+                        src={img}
+                        alt={title}
+                        title={title}
+                        className="w-[250px] hover:w-[270px] cursor-pointer transition-all delay-100 h-[300px] object-cover"
+                      />
+                    </a>
+                    <p className="font-semibold text-xl text-zinc-800">
+                      {title}
+                    </p>
+                    <p className="font-semibold text-xl text-zinc-800">
+                      Genre : {type}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
