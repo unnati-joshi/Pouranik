@@ -1603,9 +1603,19 @@ body {
 [data-theme="dark"] .min-h-screen.bg-gray-50 * {
     color: var(--text-primary) !important;
 }
+/* Dark mode background gradient for main content in about us */
 [data-theme="dark"] .min-h-screen.bg-white {
-  background-color: #34343b !important;
+  background: linear-gradient(
+    to bottom right,
+    #171717,
+    #0f172a,
+    #134e4a,
+    #0a3628
+  ) !important;
+  
 }
+
+
 [data-theme="dark"] .min-h-screen.bg-gray-50 [class*="bg-white"] {
     background: var(--neutral-200) !important;
     border-color: var(--border-color) !important;
