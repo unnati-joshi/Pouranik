@@ -1,14 +1,14 @@
-import { useState } from "react"
+// import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ formType }) => {
-    const { register, handleSubmit, setError, watch, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, formState: { errors} } = useForm();
     const navigate = useNavigate();
 
     const onSignup = async (data) => {
-        const { name, email, password } = data;
+        // const { name, email, password } = data;
         const res = await fetch("http://localhost:5000/signup", {
             method: "POST",
             headers: {
@@ -28,7 +28,7 @@ const AuthForm = ({ formType }) => {
     }
 
     const onSignin = async (data) => {
-        const { email, password } = data;
+        // const { email, password } = data;
         const res = await fetch("http://localhost:5000/login", {
             method: "POST",
             headers: {
@@ -123,4 +123,4 @@ const AuthForm = ({ formType }) => {
     )
 }
 
-export default AuthForm
+export default AuthForm;
