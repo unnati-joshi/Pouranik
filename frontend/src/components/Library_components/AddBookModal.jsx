@@ -36,7 +36,11 @@ const AddBookModal = ({ isOpen, onClose, bookInfo, book }) => {
       body: JSON.stringify(bookData)
     })
     const data = await res.json();
-    toast.success(data.message);
+    if(data.success===false){
+      toast.error(data.message);
+    }else{
+      toast.success(data.message);
+    }
     console.log(data);
     setBookmark('');
     setCategory('');
