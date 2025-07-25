@@ -5,7 +5,7 @@ const BookCard = ({ book, onBookChange }) => {
   const [isLibBookModalOpen, setIsLibBookModalOpen] = useState(false);
   const openLibModal = () => setIsLibBookModalOpen(true);
   // const closeLibModal = () => setIsLibBookModalOpen(false);
-  const closeLibModal = (e) =>  {
+  const closeLibModal = () =>  {
     console.log("Closing the modal");
     setIsLibBookModalOpen(false);
   }

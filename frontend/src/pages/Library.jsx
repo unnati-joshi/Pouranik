@@ -5,7 +5,7 @@ import ShelfSection from '../components/Library_components/ShelfSection';
 import useLibraryBooks from "../components/Library_components/books";
 
 const Library = () => {
-    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [_, setToken] = useState(localStorage.getItem("token"));
     const [reloadTrigger, setReloadTrigger] = useState(false);
     
     //for library book data to be refetched for different users as they sign in i.e. as token gets changed, its like refreshing

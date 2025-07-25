@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Modal from 'react-modal';
 import { toast } from "react-toastify";
 
