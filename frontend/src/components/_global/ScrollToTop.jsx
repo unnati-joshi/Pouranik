@@ -27,10 +27,6 @@ const ScrollToTopButton = () => {
     /**
      * @function scrollToTop
      * @description Scrolls the window to the top smoothly when the button is clicked.
-     * It uses the `window.scrollTo` method with smooth behavior.
-     * It also sets the scroll position of `document.documentElement` and `document.body`
-     * to ensure compatibility across different browsers.
-     * @returns {void}
      */
     const scrollToTop = () => {
         window.scrollTo({
