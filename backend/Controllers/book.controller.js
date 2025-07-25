@@ -26,6 +26,8 @@ export const addBook = async (req, res) => {
             category: category,
             cover: book_info.imageLinks?.large || book_info.imageLinks?.extraLarge || book_info.imageLinks?.medium || book_info.imageLinks?.thumbnail,
             google_book_id: google_book_id,
+            actual_title: book_info.title,
+            authors: book_info.authors[0],
         });
         await user.save();
         res.status(200).json({ success: true, message: "book saved" });
@@ -89,5 +91,34 @@ export const deleteLibBook = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: "Server Error", error: error.message });
         console.log(error.message);
+    }
+}
+
+export const bookSearch = async(req, res) => {
+    const { searchTerm } = req.body;
+    if (!searchTerm) {
+        return res.status(400).json({ success: false, message: "Search term is required" });
+    }
+
+    try{ 
+        const user = await User.findById(req.user.id);
+        if (!user) return res.status(404).json({ error: "User not found" });
+        const searchResults = user.books.filter(book => 
+            book.actual_title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            book.authors.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return res.status(200).json({ success: true, data: searchResults });
+    }catch(error){
+        return res.status(500).json({ success: false, message: "Server Error", error: error.message });
+    }
+}
+
+export const modalClose = async(req, res) => {
+    // This is a dummy endpoint to handle modal close requests
+    // It doesn't perform any action but is used to trigger the onClose function in the frontend
+    try {
+        res.status(200).json({ success: true, message: "Modal closed" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error", error: error.message });
     }
 }

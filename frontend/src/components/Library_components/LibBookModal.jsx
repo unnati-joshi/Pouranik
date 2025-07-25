@@ -46,8 +46,14 @@ const LibBookModal = ({ isOpen, onClose, book, onBookChange }) => {
     toast.success(data.message);
     onClose()
   }
-  
-  console.log(book);
+
+  const handleClose = async() => {
+    //Kindly understand this is just a dummy request which helping close button to work, idk how but with this api call onClose() works
+    const res = await fetch(`http://localhost:5000/api/v1/modal/close`, {
+      method: "PUT",  })
+    console.log('Modal closed');
+    onClose()
+  }
 
   return (
     <Modal
@@ -136,7 +142,7 @@ const LibBookModal = ({ isOpen, onClose, book, onBookChange }) => {
           </button>
         </div>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="px-4 py-2 !bg-white rounded hover:!bg-red-600 hover:text-white !cursor-pointer"
         >
           Close

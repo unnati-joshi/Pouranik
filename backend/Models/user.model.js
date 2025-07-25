@@ -19,6 +19,14 @@ const bookSchema = new mongoose.Schema(
         google_book_id: {
             type: String,
             required: true,
+        },
+        actual_title: {
+            type: String,
+            required: true,
+        },
+        authors: {
+            type: String,
+            required: true,
         }
     }, {
         timestamps: true,  //createdAt updatedAt

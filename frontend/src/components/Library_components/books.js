@@ -19,7 +19,7 @@ const useLibraryBooks = (trigger) => {
         });
 
         const data = await res.json();
-        console.log(data.books);
+        // console.log(data.books);
 
         // Categorize books based on `category`
         const current = [];
@@ -32,7 +32,7 @@ const useLibraryBooks = (trigger) => {
           else if (book.category === "finished") done.push(book);
         });
 
-        console.log(current, upcoming, done);
+        // console.log(current, upcoming, done);
 
         setCurrentlyReading(current);
         setNextUp(upcoming);
