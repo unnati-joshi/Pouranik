@@ -1710,3 +1710,78 @@ body {
     color: var(--neutral-500) !important; /* Brighter than text-muted */
     border-top-color: var(--border-color);
 }
+
+/* --- Navbar Base --- */
+.navbar-modern {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: transparent;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 0.4rem 1rem;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+}
+
+.navbar-scrolled {
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Logo --- */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+/* --- Desktop Menu --- */
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.navbar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+  font-size: 0.95rem;
+  
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: var(--primary-700);
+  border-bottom: 2px solid var(--primary-700);
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.theme-toggle:hover {
+  color: var(--primary-700);
+}
