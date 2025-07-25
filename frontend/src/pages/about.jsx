@@ -53,8 +53,8 @@ We chose this name because stories, whether from ancient scriptures or modern fi
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans section-padding">
       <div className="container-md">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-12" style={{ color: 'var(--primary-700)' }}>
-          About <span style={{ color: 'var(--accent-orange)' }}>Pouranik</span>
+        <h1 className=" about-title text-4xl md:text-5xl font-bold text-center mb-12">{/* style={{ color: 'var(--primary-700)' }}>*/}
+          About <span className="accent">Pouranik</span>
         </h1>
 
         <div className="grid gap-10">
