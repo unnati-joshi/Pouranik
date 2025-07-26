@@ -362,7 +362,7 @@ export default function Genres() {
                     key={title}
                     className="rounded-lg overflow-hidden grid justify-center items-center shadow-lg"
                   >
-                    <a href={link} target="blank">
+                    <a href={link} target="_blank">
                       <img
                         src={img}
                         alt={title}

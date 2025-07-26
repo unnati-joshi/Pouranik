@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import { IoLibraryOutline } from "react-icons/io5";
+import AddBookModal from '../components/Library_components/AddBookModal';
+
+import AuthorRecommendations from '../components/AuthorRecommendations';
+
 export default function BookDetail() {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setBook(null);
@@ -75,11 +81,14 @@ export default function BookDetail() {
   const imageUrl =
     info.imageLinks?.extraLarge || info.imageLinks?.large || info.imageLinks?.medium || info.imageLinks?.thumbnail;
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans antialiased">
       {/* Navigation */}
       <section className="!py-8 bg-white shadow-sm">
-        <div className="!max-w-7xl mx-auto !px-4 !sm:px-6 !lg:px-8">
+        <div className="!max-w-7xl mx-auto !px-4 !sm:px-6 !lg:px-8 flex justify-between items-center">
           <Link
             to="/explore"
             className="inline-flex items-center !px-4 !py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 no-underline"
@@ -87,6 +96,13 @@ export default function BookDetail() {
             <span className="!mr-2 text-lg">←</span>
             Back to Explore
           </Link>
+          <button
+            className='inline-flex items-center !px-4 !py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200 no-underline'
+            onClick={openModal}
+          >
+            <span className='!mr-2 text-lg'><IoLibraryOutline /></span>
+            Add to Library 
+          </button>
         </div>
       </section>
 
@@ -315,10 +331,25 @@ export default function BookDetail() {
                   ))}
                 </div>
               </section>
+              
+
             </div>
           </div>
+          <div className={cardBaseClasses}>
+            <AuthorRecommendations
+              currentBookId={id}
+              author={info.authors}
+            />
+          </div>
+          
+          
+
         </div>
       </section>
+
+      <AddBookModal isOpen={isModalOpen} onClose={closeModal} bookInfo={info} book={book} />
+
     </div>
+    
   );
 }
