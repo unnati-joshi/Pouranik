@@ -8,8 +8,7 @@ const AuthForm = ({ formType }) => {
     const navigate = useNavigate();
 
     const onSignup = async (data) => {
-        // const { name, email, password } = data;
-        const res = await fetch("http://localhost:5000/signup", {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -28,8 +27,7 @@ const AuthForm = ({ formType }) => {
     }
 
     const onSignin = async (data) => {
-        // const { email, password } = data;
-        const res = await fetch("http://localhost:5000/login", {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

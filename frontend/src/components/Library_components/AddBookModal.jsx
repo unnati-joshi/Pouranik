@@ -27,7 +27,7 @@ const AddBookModal = ({ isOpen, onClose, bookInfo, book }) => {
       google_book_id: book.id,
     }
 
-    const res = await fetch(`http://localhost:5000/api/v1/book/add`, {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/book/add`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -122,4 +122,4 @@ const AddBookModal = ({ isOpen, onClose, bookInfo, book }) => {
   )
 }
 
-export default AddBookModal
+export default AddBookModal;

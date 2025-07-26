@@ -29,7 +29,7 @@ const Library = () => {
         const delayDebounce = setTimeout(async () => {
             if (searchTerm.trim() !== "") {
                 try {
-                    const res = await fetch('http://localhost:5000/api/v1/book/search', {
+                    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/book/search`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

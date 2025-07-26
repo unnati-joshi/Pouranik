@@ -11,7 +11,7 @@ const useLibraryBooks = (trigger) => {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:5000/api/v1/library", {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/library`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -19,7 +19,6 @@ const useLibraryBooks = (trigger) => {
         });
 
         const data = await res.json();
-        // console.log(data.books);
 
         // Categorize books based on `category`
         const current = [];
@@ -31,8 +30,6 @@ const useLibraryBooks = (trigger) => {
           else if (book.category === "next-up") upcoming.push(book);
           else if (book.category === "finished") done.push(book);
         });
-
-        // console.log(current, upcoming, done);
 
         setCurrentlyReading(current);
         setNextUp(upcoming);
