@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
@@ -7,6 +8,23 @@ import { GiInspiration } from "react-icons/gi";
 import { TbTargetArrow } from "react-icons/tb";
 
 export default function Home() {
+  useEffect(() => {
+  if (sessionStorage.getItem("showLoginToast") === "true") {
+    toast.success("Logged in successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showLoginToast");
+  }
+
+  if (sessionStorage.getItem("showSignupToast") === "true") {
+    toast.success("Signed up successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showSignupToast");
+  }
+
+  if (sessionStorage.getItem("showLogoutToast") === "true") {
+    toast.success("Logged out successfully!", { autoClose: 3000 });
+    sessionStorage.removeItem("showLogoutToast");
+  }
+}, []);
+
   // Inject Chatbase script on page load
   useEffect(() => {
     const script = document.createElement("script");

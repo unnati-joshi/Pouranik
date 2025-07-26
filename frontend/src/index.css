@@ -67,6 +67,15 @@ button:focus-visible {
   }
 }
 
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -239,7 +248,7 @@ button:focus-visible {
   margin-bottom: 10px;
 }
 
-.category-icon{
+.category-icon {
   color: var(--primary-600);
   align-self: center;
   justify-content: center;
@@ -248,7 +257,7 @@ button:focus-visible {
   margin-bottom: 10px;
 }
 
-.inspiration-icon{
+.inspiration-icon {
   color: var(--primary-600);
   align-self: center;
   justify-content: center;
@@ -256,7 +265,6 @@ button:focus-visible {
   font-size: 50px;
   margin-bottom: 10px;
 }
-
 
 .cta-2{
   font-family: "Roboto Slab", serif;
@@ -293,7 +301,9 @@ button:focus-visible {
   font-size: 18px;
 }
 
-.smart-search-description{
+.smart-search-description,
+.category-description,
+.inspiration-description {
   font-family: sans-serif;
   font-weight: 450;
   font-style: semi-bold;
@@ -303,24 +313,12 @@ button:focus-visible {
   margin-top: 10px ;
 }
 
-.category-description{
-  font-family: sans-serif;
-  font-weight: 450;
-  font-style: semi-bold;
-  font-size: 16px;
-  text-align: center;
+.category-description {
   letter-spacing: -0.7px;
-  margin-top: 10px ;
 }
 
-.inspiration-description{
-  font-family: sans-serif;
-  font-weight: 450;
-  font-style: semi-bold;
+.inspiration-description {
   font-size: 17px;
-  text-align: center;
-  letter-spacing: -0.5px;
-  margin-top: 10px ;
 }
 
 .book-card{
