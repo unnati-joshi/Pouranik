@@ -11,6 +11,10 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
+app.get("/healthcheck", (req, res) => {
+    res.status(200).send("OK");
+});
+
 app.get("/", (req,res) => {
     res.send("Welcome to Pouranik !");
 })
