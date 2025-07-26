@@ -1,10 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Search, BookMarked, BookOpen } from "lucide-react";
-
+import { Home, Search, BookMarked, BookOpen, Menu, X, Sun, Moon } from "lucide-react";
+import { useState } from "react";
 
 export default function Navbar({ isDarkMode, toggleTheme }) {
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <nav className="navbar-modern">
@@ -12,26 +21,35 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
         {/* Logo */}
         <Link to="/" className="navbar-logo" data-tour="navbar-logo">
           <div className="text-2xl">
-            <BookOpen size={35} className="text-[#0f766e]" />
+            <BookOpen size={45} className="text-[#0f766e]" />
           </div>
           <div>
             <h1
-              className="text-xl font-bold"
-              style={{ color: "var(--primary-700)" }}
+              className="Titlebar"
+              style={{ color: "var(--primary-600)" }}
             >
               Pouranik
             </h1>
             <p
-              className="text-xs"
-              style={{ color: "var(--text-muted)", marginTop: "-2px" }}
+              className="Subtitle"
+              style={{ color: "var(--text-muted)", marginTop: "-5px" }}
             >
               Book Discovery
             </p>
           </div>
         </Link>
 
-        {/* Navigation Links */}
-        <div className="navbar-menu">
+        {/* Mobile Menu Button */}
+        <button
+          className="mobile-menu-toggle hidden max-md:flex"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle mobile menu"
+        >
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+
+        {/* Navigation Links - Desktop */}
+        <div className="navbar-menu hidden md:flex">
           {[
             { path: "/", label: "Home", icon: <Home size={18} /> },
             { path: "/explore", label: "Explore", icon: <Search size={18} /> },
@@ -48,7 +66,7 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
             </Link>
           ))}
 
-          {/* Dark Mode Toggle */}
+          {/* Dark Mode Toggle - Desktop */}
           <button
             onClick={toggleTheme}
             className="theme-toggle"
@@ -56,13 +74,55 @@ export default function Navbar({ isDarkMode, toggleTheme }) {
             data-tour="navbar-theme-toggle"
           >
             <span className="theme-icon">
-              {isDarkMode ? "☀️" : "🌙"}
+              {isDarkMode ? <Sun size={18} className="text-yellow-500" /> : <Moon size={18} className="text-blue-900" />}
             </span>
             <span className="theme-label">
               {isDarkMode ? "Light" : "Dark"}
             </span>
           </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="mobile-menu md:hidden">
+            <div className="mobile-menu-overlay" onClick={closeMobileMenu}></div>
+            <div className="mobile-menu-content">
+              {[
+                { path: "/", label: "Home", icon: <Home size={20} /> },
+                { path: "/explore", label: "Explore", icon: <Search size={20} /> },
+                { path: "/genres", label: "Genres", icon: <BookMarked size={20} /> },
+              ].map(({ path, label, icon }) => (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`mobile-menu-link ${isActive(path) ? "active" : ""}`}
+                  onClick={closeMobileMenu}
+                  data-tour={`mobile-navbar-link-${label.toLowerCase()}`}
+                >
+                  <span className="mobile-menu-icon">{icon}</span>
+                  <span className="mobile-menu-label">{label}</span>
+                </Link>
+              ))}
+
+              {/* Dark Mode Toggle - Mobile */}
+              <button
+                onClick={() => {
+                  toggleTheme();
+                  closeMobileMenu();
+                }}
+                className="mobile-theme-toggle"
+                aria-label="Toggle dark mode"
+              >
+                <span className="mobile-menu-icon">
+                  {isDarkMode ? <Sun size={20} className="text-yellow-500" /> : <Moon size={20} className="text-blue-900" />}
+                </span>
+                <span className="mobile-menu-label">
+                  {isDarkMode ? "Light Mode" : "Dark Mode"}
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
