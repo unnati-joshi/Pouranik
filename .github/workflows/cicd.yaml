@@ -3,8 +3,16 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [main, develop]
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - '.github/workflows/cicd.yaml'
   pull_request:
     branches: [main, develop]
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - '.github/workflows/cicd.yaml'
 
 jobs:
   frontend-build:
@@ -13,7 +21,8 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-
+    # Only run if frontend files change
+    if: contains(github.event.head_commit.modified, 'frontend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -66,7 +75,8 @@ jobs:
     defaults:
       run:
         working-directory: ./backend
-
+    # Only run if backend files change
+    if: contains(github.event.head_commit.modified, 'backend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -93,15 +103,14 @@ jobs:
           fi
         continue-on-error: true
 
-      # Optionally add build or deploy steps here
-
   security-check:
     name: Security Audit
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./frontend
-
+    # Only run if frontend files change
+    if: contains(github.event.head_commit.modified, 'frontend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -133,7 +142,8 @@ jobs:
     defaults:
       run:
         working-directory: ./frontend
-
+    # Only run if frontend files change
+    if: contains(github.event.head_commit.modified, 'frontend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
