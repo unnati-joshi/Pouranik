@@ -48,11 +48,12 @@ const LibBookModal = ({ isOpen, onClose, book, onBookChange }) => {
   }
 
   const handleClose = async() => {
-    //Kindly understand this is just a dummy request which helping close button to work, idk how but with this api call onClose() works
-    const res = await fetch(`http://localhost:5000/api/v1/modal/close`, {
-      method: "PUT",  })
+  //Kindly understand this is just a dummy request which helping close button to work, idk how but with this api call onClose() works
+    await fetch(`http://localhost:5000/api/v1/modal/close`, {
+    method: "PUT",
+    });
     console.log('Modal closed');
-    onClose()
+    onClose();
   }
 
   return (
