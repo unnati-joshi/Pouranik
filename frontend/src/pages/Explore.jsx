@@ -127,9 +127,11 @@ export default function Explore() {
     const genreParam = searchParams.get("genre");
     if (genreParam) {
       setQuery(genreParam);
-      handleSearch({ preventDefault: () => { } }, genreParam, 0);
+      setSearched(false); // Allow editing and let user trigger search
+      setBooks([]);
+      setTotalItems(0);
     }
-  }, [searchParams, handleSearch]);
+  }, [searchParams]);
 
   const popularSearches = [
     "Harry Potter",
