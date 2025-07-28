@@ -127,9 +127,7 @@ export default function Explore() {
     const genreParam = searchParams.get("genre");
     if (genreParam) {
       setQuery(genreParam);
-      setSearched(false); // Allow editing and let user trigger search
-      setBooks([]);
-      setTotalItems(0);
+      handleSearch({ preventDefault: () => { } }, genreParam, 0);
     }
   }, [searchParams]);
 
