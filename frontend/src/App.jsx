@@ -91,8 +91,8 @@ function App() {
   const handleTourPrev = () => setTourStep((s) => Math.max(s - 1, 0));
   const handleTourClose = () => setTourOpen(false);
 
-  return (
-    <div className="app-gradient">
+return (
+  <div className={`app-gradient ${isDarkMode ? 'dark' : ''}`}>
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <main className="main-content">
         <div className="page-wrapper">
